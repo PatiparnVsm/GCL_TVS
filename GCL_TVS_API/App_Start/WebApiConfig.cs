@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GCL_TVS_API
 {
@@ -10,6 +11,9 @@ namespace GCL_TVS_API
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             // Remove the XML formatter (Json Only)
             config.Formatters.Remove(config.Formatters.XmlFormatter);
