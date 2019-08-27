@@ -103,13 +103,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SOController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="DAL\BaseConnection.cs" />
+    <Compile Include="DAL\SODAL.cs" />
     <Compile Include="DAL\TokenDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SODetailsUrl.cs" />
     <Compile Include="Models\Token.cs" />
+    <Compile Include="Process\GetSODetailsProcess.cs" />
     <Compile Include="Process\TokenProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

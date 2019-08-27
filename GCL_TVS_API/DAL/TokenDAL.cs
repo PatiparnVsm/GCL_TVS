@@ -12,6 +12,7 @@ namespace GCL_TVS_API.DAL
     {
         public bool AuthenCheck(RequestToken data)
         {
+            ////
             bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {
