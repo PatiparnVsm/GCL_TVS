@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using GCL_TVS_API.DAL;
 using static GCL_TVS_API.Models.SODetailsUrl;
+using static GCL_TVS_API.Models.SODetailsService;
 
 
 namespace GCL_TVS_API.Process
@@ -41,6 +42,27 @@ namespace GCL_TVS_API.Process
             {
                 response.responseCode = "99";
                 response.soUrl = "";
+                response.responseMSG = "tokenId expire or invalid";
+            }
+
+            return response;
+        }
+        public ResponseSODetails GetdataSO(RequestSODetails data)
+        {
+            ResponseSODetails response = new ResponseSODetails();
+            string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
+            if (!string.IsNullOrEmpty(reqParam))
+            {
+                string [] reqParams = reqParam.Split(',');
+                string condition = reqParams[1] + " and " + reqParams[2];
+                response.responseCode = "000";
+                response.sODetails = SODAL.GetSODetails(condition);
+                response.responseMSG = "Success";
+
+            }
+            else
+            {
+                response.responseCode = "99";
                 response.responseMSG = "tokenId expire or invalid";
             }
 

@@ -1,6 +1,7 @@
 ﻿using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
+using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
 
 namespace GCL_TVS_API.Controllers
@@ -23,6 +24,22 @@ namespace GCL_TVS_API.Controllers
                 res = process.GenerateUrl(data);
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+        [HttpPost]
+        public ResponseSODetails GetSODetailsFromHash([FromBody] RequestSODetails data)
+        {
+            ResponseSODetails res = new ResponseSODetails();
+
+            try
+            {
+                res = process.GetdataSO(data);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
