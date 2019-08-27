@@ -19,7 +19,7 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"SELECT count(*) FROM [dbo].[SystemsToken] WHERE [TokenID] = @TokenID AND [TerminateOn] <= Getdate()";
+                    string sql = @"SELECT count(*) FROM [dbo].[SystemsToken] WHERE [TokenID] = @TokenID AND [TerminateOn] >= Getdate()";
 
                     if (connection.ExecuteScalar<int>(sql, new { TokenID = tokenId }) > 0)
                     {
