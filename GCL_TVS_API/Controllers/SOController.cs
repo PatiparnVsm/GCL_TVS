@@ -14,7 +14,7 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponseUrl RequestToken([FromBody] RequestUrl data)
+        public ResponseUrl GetSODetails([FromBody] RequestUrl data)
         {
             ResponseUrl res = new ResponseUrl();
 
