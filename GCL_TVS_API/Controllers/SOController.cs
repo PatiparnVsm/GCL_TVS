@@ -1,26 +1,26 @@
 ﻿using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
-using static GCL_TVS_API.Models.Token;
+using static GCL_TVS_API.Models.SODetailsUrl;
 
 namespace GCL_TVS_API.Controllers
 {
     public class SOController : ApiController
     {
-        private static TokenProcess _process = null;
-        private static TokenProcess process
+        private static GetSODetailsProcess _process = null;
+        private static GetSODetailsProcess process
         {
-            get { return (_process == null) ? _process = new TokenProcess() : _process; }
+            get { return (_process == null) ? _process = new GetSODetailsProcess() : _process; }
         }
 
         [HttpPost]
-        public ResponseToken RequestToken([FromBody] RequestToken data)
+        public ResponseUrl RequestToken([FromBody] RequestUrl data)
         {
-            ResponseToken res = new ResponseToken();
+            ResponseUrl res = new ResponseUrl();
 
             try
             {
-                res = process.GenerateToken(data);
+                res = process.GenerateUrl(data);
             }
             catch(Exception ex)
             {

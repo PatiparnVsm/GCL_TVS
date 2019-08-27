@@ -114,6 +114,7 @@
     <Compile Include="DAL\BaseConnection.cs" />
     <Compile Include="DAL\SODAL.cs" />
     <Compile Include="DAL\TokenDAL.cs" />
+    <Compile Include="DAL\Utility.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

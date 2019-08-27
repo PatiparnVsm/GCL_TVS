@@ -40,5 +40,31 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
+        public void InsLogReq(string tokenId,string reqParams, string hashParams)
+        {
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@TokenID", tokenId);
+                    param.Add("@RequestParam", reqParams);
+                    param.Add("@ResponseParam", hashParams);
+                    param.Add("@CreatedBy", "InsLogReq");
+                    connection.Query<string>("SP_GenerateToken", param, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+        }
     }
 }
