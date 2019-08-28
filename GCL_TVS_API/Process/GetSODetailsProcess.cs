@@ -24,19 +24,17 @@ namespace GCL_TVS_API.Process
 
         public ResponseUrl GenerateUrl(RequestUrl data)
         {
-            ResponseUrl response = new ResponseUrl();
-
-            
+            ResponseUrl response = new ResponseUrl();            
 
             if (SODAL.AuthenCheckTokenExpire(data.tokenId))
             {
                 string reqParams = string.Format("TokenID='{0}',CompanyCode='{1}',SONO='{2}'", data.tokenId,data.customerCode,data.soNo);
                 string hashParams = Utility.HashData(reqParams);
                 response.responseCode = "000";
+                hashParams = HttpUtility.UrlEncode(hashParams);
                 response.soUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
                 response.responseMSG = "Success";
                 SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
-
             }
             else
             {

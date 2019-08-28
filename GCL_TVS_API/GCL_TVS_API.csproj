@@ -118,6 +118,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\SODetails.cs" />
     <Compile Include="Models\SODetailsService.cs" />
     <Compile Include="Models\SODetailsUrl.cs" />
@@ -128,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
