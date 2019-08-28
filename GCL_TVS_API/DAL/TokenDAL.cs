@@ -49,7 +49,7 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     var param = new DynamicParameters();
-                    param.Add("@SystemCode", systemCode);
+                    param.Add("@SystemID", systemCode);
                     param.Add("TokenID", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
                     connection.Query<string>("SP_GenerateToken", param, commandType: CommandType.StoredProcedure);
                     tokenId = param.Get<string>("TokenID");                   
