@@ -1,13 +1,11 @@
 ﻿using CIMB.DSE.ML.DAL;
 using Dapper;
+using GCL_TVS_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
 using static GCL_TVS_API.Models.SODetailsUrl;
-using static GCL_TVS_API.Models.SODetails;
-using GCL_TVS_API.Models;
 
 namespace GCL_TVS_API.DAL
 {
@@ -42,6 +40,7 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
+
         public string AuthenCheckTokenURLExpire(string hashParams)
         {
             string result = "";
@@ -70,7 +69,7 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
-        public void InsLogReq(string tokenId,string reqParams, string hashParams)
+        public void InsLogReq(string tokenId, string reqParams, string hashParams)
         {
             using (IDbConnection connection = GetOpenConnection())
             {
@@ -106,7 +105,7 @@ namespace GCL_TVS_API.DAL
                     string sql = @" SELECT OrderDate as orderDate,OrderDetails as orderDetails,CompanyName as companyName
                                     FROM SalesOrders A
                                     INNER JOIN Companies B ON A.CompanyID = B.CompanyID
-                                    WHERE "+ condition;
+                                    WHERE " + condition;
 
                     ResultSet = connection.Query<SODetails>(sql).ToList();
                 }
@@ -125,6 +124,23 @@ namespace GCL_TVS_API.DAL
 
             return ResultSet;
 
+        }
+        public string ValidateSODetails(RequestUrl data)
+        {
+            string resultCode = string.Empty;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"SELECT dbo.fn_CheckTokenAndSONo(@TokenId,@SONo,@CompanyCode)";
+                    resultCode = connection.ExecuteScalar<string>(sql, new { TokenId = data.tokenId, SONo = data.soNo, CompanyCode = data.customerCode });
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return resultCode;
         }
     }
 }

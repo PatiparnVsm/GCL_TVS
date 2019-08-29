@@ -33,7 +33,10 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                res.tokenId = tokenDAL.GetToken(data.systemId);
+                if (IsGuid(data.systemId))
+                {
+                    res.tokenId = tokenDAL.GetToken(data.systemId);
+                }
             }
             catch (Exception ex)
             {
@@ -41,6 +44,12 @@ namespace GCL_TVS_API.Process
             }
 
             return res;
+        }
+
+        public bool IsGuid(string value)
+        {
+            Guid x;
+            return Guid.TryParse(value, out x);
         }
 
     }
