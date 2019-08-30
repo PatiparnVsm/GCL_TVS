@@ -15,7 +15,7 @@ namespace GCL_TVS_API.Models
         }
         public class ResponseUrl
         {
-            public string soUrl { get; set; }
+            public string pageUrl { get; set; }
             public string responseCode { get; set; }
             public string responseMSG { get; set; }
         }

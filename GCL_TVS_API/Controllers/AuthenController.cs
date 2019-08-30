@@ -5,7 +5,7 @@ using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API.Controllers
 {
-    public class TokenController : ApiController
+    public class AuthenController : ApiController
     {
         private static TokenProcess _process = null;
         private static TokenProcess process
@@ -14,7 +14,7 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponseToken RequestToken([FromBody] RequestToken data)
+        public ResponseToken SystemAuthen([FromBody] RequestToken data)
         {
             ResponseToken res = new ResponseToken();
 

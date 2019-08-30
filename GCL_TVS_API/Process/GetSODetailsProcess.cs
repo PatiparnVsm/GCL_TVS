@@ -32,7 +32,7 @@ namespace GCL_TVS_API.Process
                 string hashParams = Utility.HashData(reqParams);
                 hashParams = HttpUtility.UrlEncode(hashParams);
 
-                response.soUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
+                response.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
                 response.responseMSG = "Success";
 
                 SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
