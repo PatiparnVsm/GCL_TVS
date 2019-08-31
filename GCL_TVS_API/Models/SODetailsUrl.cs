@@ -19,5 +19,11 @@ namespace GCL_TVS_API.Models
             public string responseCode { get; set; }
             public string responseMSG { get; set; }
         }
+
+        public class ResSP
+        {
+            public string Code { get; set; }
+            public string Msg { get; set; }
+        }
     }
 }

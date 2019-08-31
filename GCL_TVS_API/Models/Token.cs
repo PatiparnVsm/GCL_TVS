@@ -17,5 +17,11 @@ namespace GCL_TVS_API.Models
         {
             public string tokenId { get; set; }
         }
+
+        public class ResponseTokenByUser
+        {
+            public string tokenId { get; set; }
+            public string userRole { get; set; }
+        }        
     }
 }

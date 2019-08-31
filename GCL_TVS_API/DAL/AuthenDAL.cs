@@ -8,7 +8,7 @@ using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API.DAL
 {
-    public class TokenDAL : BaseConnection
+    public class AuthenDAL : BaseConnection
     {
         public bool AuthenCheck(RequestToken data)
         {
@@ -50,9 +50,39 @@ namespace GCL_TVS_API.DAL
                 {
                     var param = new DynamicParameters();
                     param.Add("@SystemID", systemCode);
-                    param.Add("TokenID", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
-                    connection.Query<string>("SP_GenerateToken", param, commandType: CommandType.StoredProcedure);
-                    tokenId = param.Get<string>("TokenID");                   
+                    param.Add("TokenId", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
+                    connection.Query<string>("SP_GenerateTokenBySystemId", param, commandType: CommandType.StoredProcedure);
+                    tokenId = param.Get<string>("TokenId");                   
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+                return tokenId;
+            }
+        }
+
+        public string GetTokenbyUser(string username,string password)
+        {
+            string tokenId = string.Empty;
+
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@Username", username);
+                    param.Add("@Password", password);
+                    param.Add("TokenId", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
+                    connection.Query<string>("SP_GenerateTokenByUser", param, commandType: CommandType.StoredProcedure);
+                    tokenId = param.Get<string>("TokenId");
                 }
                 catch (Exception ex)
                 {

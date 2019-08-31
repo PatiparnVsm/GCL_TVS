@@ -1,4 +1,7 @@
 ﻿using GCL_TVS_API.DAL;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Web;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
@@ -23,67 +26,75 @@ namespace GCL_TVS_API.Process
         {
             ResponseUrl response = new ResponseUrl();
 
-            var responseCode = SODAL.ValidateSODetails(data);
-            response.responseCode = responseCode;
-
-            if (responseCode == "00")
+            try
             {
-                string reqParams = string.Format("TokenID='{0}',CompanyCode='{1}',SONO='{2}'", data.tokenId, data.customerCode, data.soNo);
-                string hashParams = Utility.HashData(reqParams);
-                hashParams = HttpUtility.UrlEncode(hashParams);
+                var res = SODAL.ValidateSODetails(data);
+                response.responseCode = res.Code;
+                response.responseMSG = res.Msg;
 
-                response.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
-                response.responseMSG = "Success";
+                if (response.responseCode == "00")
+                {
+                    var reqParams = GenerateReqparams(data);
+                    string hashParams = Utility.HashData(reqParams);
 
-                SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
+                    SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
+
+                    hashParams = HttpUtility.UrlEncode(hashParams);
+                    response.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
+                }
             }
-            if (responseCode == "01")
+            catch (Exception ex)
             {
-                response.responseMSG = "Not found SalesOrders or CustomerCode";
+                throw ex;
             }
-            if (responseCode == "99")
-            {
-                response.responseMSG = "tokenId expire or invalid";
-            }
-            //if (SODAL.AuthenCheckTokenExpire(data.tokenId))
-            //{
-            //    string reqParams = string.Format("TokenID='{0}',CompanyCode='{1}',SONO='{2}'", data.tokenId,data.customerCode,data.soNo);
-            //    string hashParams = Utility.HashData(reqParams);
-            //    response.responseCode = "000";
-            //    hashParams = HttpUtility.UrlEncode(hashParams);
-            //    response.soUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
-            //    response.responseMSG = "Success";
-            //    SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
-            //}
-            //else
-            //{
-            //    response.responseCode = "99";
-            //    response.soUrl = "";
-            //    response.responseMSG = "tokenId expire or invalid";
-            //}
 
             return response;
         }
         public ResponseSODetails GetdataSO(RequestSODetails data)
         {
             ResponseSODetails response = new ResponseSODetails();
-            string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
-            if (!string.IsNullOrEmpty(reqParam))
+            try
             {
-                string[] reqParams = reqParam.Split(',');
-                string condition = reqParams[1] + " and " + reqParams[2];
-                response.responseCode = "000";
-                response.sODetails = SODAL.GetSODetails(condition);
-                response.responseMSG = "Success";
+                string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
+                if (!string.IsNullOrEmpty(reqParam))
+                {
+                    string[] reqParams = reqParam.Split(',');
+                    //string condition = reqParams[1] + " and " + reqParams[2];
+                    response.sODetails = SODAL.GetSODetails(reqParams);
 
+                    response.responseCode = "00";
+                    response.responseMSG = "Success";
+
+                }
+                else
+                {
+                    response.responseCode = "99";
+                    response.responseMSG = "tokenId expire or invalid";
+                }
             }
-            else
+            catch(Exception ex)
             {
-                response.responseCode = "99";
-                response.responseMSG = "tokenId expire or invalid";
+                throw ex;
             }
-
             return response;
+        }
+
+        private string GenerateReqparams(object data)
+        {
+            string reqParam = string.Empty;
+            Type myType = data.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            var reqParams = string.Empty;
+            foreach (PropertyInfo prop in props)
+            {
+                var name = prop.Name;
+                var value = (string)prop.GetValue(data, null);
+
+                reqParams += string.Format(name + "=" + value + ",");
+            }
+            reqParams = reqParams.Remove(reqParams.Length - 1);
+            return reqParams;
         }
     }
 }

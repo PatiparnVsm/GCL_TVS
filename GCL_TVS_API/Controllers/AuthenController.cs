@@ -7,10 +7,10 @@ namespace GCL_TVS_API.Controllers
 {
     public class AuthenController : ApiController
     {
-        private static TokenProcess _process = null;
-        private static TokenProcess process
+        private static AuthenProcess _process = null;
+        private static AuthenProcess process
         {
-            get { return (_process == null) ? _process = new TokenProcess() : _process; }
+            get { return (_process == null) ? _process = new AuthenProcess() : _process; }
         }
 
         [HttpPost]
@@ -23,6 +23,24 @@ namespace GCL_TVS_API.Controllers
                 res = process.GenerateToken(data);
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+
+         
+   return res;
+        }
+
+        [HttpPost]
+        public ResponseToken UserAuthen([FromBody] RequestToken data)
+        {
+            ResponseToken res = new ResponseToken();
+
+            try
+            {
+                res = process.GenerateToken(data);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

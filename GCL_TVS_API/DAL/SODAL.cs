@@ -95,19 +95,21 @@ namespace GCL_TVS_API.DAL
                 }
             }
         }
-        public List<SODetails> GetSODetails(string condition)
+        public List<SODetails> GetSODetails(string[] data)
         {
             List<SODetails> ResultSet = new List<SODetails>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
-                    string sql = @" SELECT OrderDate as orderDate,OrderDetails as orderDetails,CompanyName as companyName
-                                    FROM SalesOrders A
-                                    INNER JOIN Companies B ON A.CompanyID = B.CompanyID
-                                    WHERE " + condition;
-
-                    ResultSet = connection.Query<SODetails>(sql).ToList();
+                    var param = new DynamicParameters();
+                    for (var i = 0; i < data.Length; i++)
+                    {
+                        var arrData = data[i].Split(',');
+                        param.Add("@" + arrData[0], arrData[1]);
+                    }
+                    ResultSet = connection.Query<SODetails>("SP_GetJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -125,22 +127,26 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
-        public string ValidateSODetails(RequestUrl data)
+        public SODetailsUrl.ResSP ValidateSODetails(RequestUrl data)
         {
-            string resultCode = string.Empty;
+            SODetailsUrl.ResSP res = new SODetailsUrl.ResSP();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
-                    string sql = @"SELECT dbo.fn_CheckTokenAndSONo(@TokenId,@SONo,@CompanyCode)";
-                    resultCode = connection.ExecuteScalar<string>(sql, new { TokenId = data.tokenId, SONo = data.soNo, CompanyCode = data.customerCode });
+                    var param = new DynamicParameters();
+                    param.Add("@TokenID", data.tokenId);
+                    param.Add("@SONO", data.soNo);
+                    param.Add("@CompanyCode", data.customerCode);
+                    res = connection.Query<SODetailsUrl.ResSP>("SP_CheckTokenIdAndSONO", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-            return resultCode;
+            return res;
         }
+
     }
 }
