@@ -171,6 +171,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\PictureList.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\SODetails.cs" />
     <Compile Include="Models\SODetailsService.cs" />
     <Compile Include="Models\SODetailsUrl.cs" />
