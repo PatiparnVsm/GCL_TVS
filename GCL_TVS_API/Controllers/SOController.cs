@@ -65,13 +65,13 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponseSODetails GetSoDetailsFromJobnoAndSo([FromBody] RequestSODetailsFromCustAndSo data)
+        public ResponseSODetails GetSoDetailsFromJobnoAndSo([FromBody] RequestSODetailsFromJobnoAndSo data)
         {
             ResponseSODetails res = new ResponseSODetails();
 
             try
             {
-                res = process.GetdataSOFromCustAndSo(data);
+                res = process.GetdataSOFromJobnoAndSo(data);
             }
             catch (Exception ex)
             {

@@ -16,6 +16,13 @@ namespace GCL_TVS_API.Process
         {
             get { return (_SODAL == null) ? _SODAL = new SODAL() : _SODAL; }
         }
+
+        private static AuthenDAL _AuthenDal = null;
+        private static AuthenDAL AuthenDal
+        {
+            get { return (_AuthenDal == null) ? _AuthenDal = new AuthenDAL() : _AuthenDal; }
+        }
+
         private static Utility _Utility = null;
         private static Utility Utility
         {
@@ -84,7 +91,7 @@ namespace GCL_TVS_API.Process
             ResponseSODetails response = new ResponseSODetails();
             try
             {
-                if (Utility.IsGuid(data.TokenID))
+                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
                 {
                     response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
                     response.responseCode = "00";
@@ -108,7 +115,7 @@ namespace GCL_TVS_API.Process
             ResponseSODetails response = new ResponseSODetails();
             try
             {
-                if (Utility.IsGuid(data.TokenID))
+                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
                 {
                     response.sODetails = SODAL.GetSODetailsFromJobnoAndSo(data);
                     response.responseCode = "00";
