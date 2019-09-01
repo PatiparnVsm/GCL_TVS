@@ -164,6 +164,7 @@
     <Compile Include="Controllers\SOController.cs" />
     <Compile Include="Controllers\AuthenController.cs" />
     <Compile Include="DAL\BaseConnection.cs" />
+    <Compile Include="DAL\EPODDAL.cs" />
     <Compile Include="DAL\SODAL.cs" />
     <Compile Include="DAL\AuthenDAL.cs" />
     <Compile Include="DAL\Utility.cs" />
@@ -173,10 +174,12 @@
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\PictureList.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\EPOD.cs" />
     <Compile Include="Models\SODetails.cs" />
     <Compile Include="Models\SODetailsService.cs" />
     <Compile Include="Models\SODetailsUrl.cs" />
     <Compile Include="Models\Token.cs" />
+    <Compile Include="Process\EPOD.cs" />
     <Compile Include="Process\GetSODetailsProcess.cs" />
     <Compile Include="Process\AuthenProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
