@@ -178,36 +178,7 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
-        public List<SODetails> GetSODetailsFromJobnoAndSo(RequestSODetailsFromJobnoAndSo data)
-        {
-            List<SODetails> ResultSet = new List<SODetails>();
-            using (IDbConnection connection = GetOpenConnection())
-            {
-                try
-                {
-                    var param = new DynamicParameters();
-                    param.Add("@UserID", data.UserID);
-                    param.Add("@JobNo", data.JobNo);
-                    param.Add("@SoNo", data.SoNo);
-                    ResultSet = connection.Query<SODetails>("SP_GetJobDetailsFromJobnoAndSo", param, commandType: CommandType.StoredProcedure).ToList();
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    if (connection != null)
-                    {
-                        connection.Close();
-                    }
-                }
-            }
-
-            return ResultSet;
-
-        }
+      
         
 
     }
