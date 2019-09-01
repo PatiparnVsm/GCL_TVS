@@ -64,21 +64,6 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [HttpPost]
-        public ResponseSODetails GetSoDetailsFromJobnoAndSo([FromBody] RequestSODetailsFromJobnoAndSo data)
-        {
-            ResponseSODetails res = new ResponseSODetails();
-
-            try
-            {
-                res = process.GetdataSOFromJobnoAndSo(data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return res;
-        }
+       
     }
 }

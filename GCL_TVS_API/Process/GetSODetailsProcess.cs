@@ -110,29 +110,7 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseSODetails GetdataSOFromJobnoAndSo(RequestSODetailsFromJobnoAndSo data)
-        {
-            ResponseSODetails response = new ResponseSODetails();
-            try
-            {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
-                {
-                    response.sODetails = SODAL.GetSODetailsFromJobnoAndSo(data);
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
-                }
-                else
-                {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return response;
-        }
+       
             
         private string GenerateReqparams(object data)
         {

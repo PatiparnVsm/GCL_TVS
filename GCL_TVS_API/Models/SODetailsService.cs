@@ -26,12 +26,6 @@ namespace GCL_TVS_API.Models
             public string SoNo { get; set; }
         }
 
-        public class RequestSODetailsFromJobnoAndSo
-        {
-            public string TokenID { get; set; }
-            public string UserID { get; set; }
-            public string JobNo { get; set; }
-            public string SoNo { get; set; }
-        }
+        
     }
 }
