@@ -103,9 +103,9 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     var param = new DynamicParameters();
-                    for (var i = 0; i < data.Length; i++)
+                    for (var i = 1; i < data.Length; i++)
                     {
-                        var arrData = data[i].Split(',');
+                        var arrData = data[i].Split('=');
                         param.Add("@" + arrData[0], arrData[1]);
                     }
                     ResultSet = connection.Query<SODetails>("SP_GetJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
