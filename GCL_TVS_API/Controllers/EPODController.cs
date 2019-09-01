@@ -1,9 +1,7 @@
 ﻿using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
-using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
-using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API.Controllers
@@ -21,26 +19,9 @@ namespace GCL_TVS_API.Controllers
         {
             ResponsePictureSize res = new ResponsePictureSize();
 
-            //try
-            //{
-            //    res = process.GetdataSOFromCustAndSo(data);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-
-            return res;
-        }
-
-        [HttpPost]
-        public ResponseSODetails GetJobDetailsFromJobnoAndSo([FromBody] RequestJobDetailsFromJobnoAndSo data)
-        {
-            ResponseSODetails res = new ResponseSODetails();
-
             try
             {
-                res = process.GetdataJobFromCustAndSo(data);
+                res = process.GetPictureSize(data);
             }
             catch (Exception ex)
             {
@@ -51,13 +32,13 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResSurverList GetSurveysList([FromBody] SurverList data)
+        public ResponsePictureList GetPicturesList([FromBody] RequestPictureList data)
         {
-            ResSurverList res = new ResSurverList();
+            ResponsePictureList res = new ResponsePictureList();
 
             try
             {
-                res = process.GetSurverList(data);
+                res = process.GetPicturesList(data);
             }
             catch (Exception ex)
             {
@@ -67,21 +48,5 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [HttpPost]
-        public ResActivitieList GetActivityList([FromBody] ActivitieList data)
-        {
-            ResActivitieList res = new ResActivitieList();
-
-            try
-            {
-                res = process.GetActivitieList(data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return res;
-        }
     }
 }
