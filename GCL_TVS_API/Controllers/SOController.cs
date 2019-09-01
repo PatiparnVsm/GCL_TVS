@@ -46,5 +46,39 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+
+        [HttpPost]
+        public ResponseSODetails GetSoDetailsFromCustAndSo([FromBody] RequestSODetailsFromCustAndSo data)
+        {
+            ResponseSODetails res = new ResponseSODetails();
+
+            try
+            {
+                res = process.GetdataSOFromCustAndSo(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+
+        [HttpPost]
+        public ResponseSODetails GetSoDetailsFromJobnoAndSo([FromBody] RequestSODetailsFromCustAndSo data)
+        {
+            ResponseSODetails res = new ResponseSODetails();
+
+            try
+            {
+                res = process.GetdataSOFromCustAndSo(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
     }
 }

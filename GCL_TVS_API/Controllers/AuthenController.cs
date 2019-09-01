@@ -32,13 +32,13 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponseToken UserAuthen([FromBody] RequestToken data)
+        public ResponseToken UserAuthen([FromBody] AuthenByUser data)
         {
             ResponseToken res = new ResponseToken();
 
             try
             {
-                res = process.GenerateToken(data);
+                res = process.GenerateTokenByUser(data);
             }
             catch (Exception ex)
             {

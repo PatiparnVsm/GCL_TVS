@@ -14,5 +14,12 @@ namespace GCL_TVS_API.DAL
             sha512.Clear();
             return Convert.ToBase64String(EncryptedSHA512);
         }
+
+        public bool IsGuid(string value)
+        {
+            Guid x;
+            return Guid.TryParse(value, out x);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
 
 namespace GCL_TVS_API.DAL
@@ -147,6 +148,67 @@ namespace GCL_TVS_API.DAL
             }
             return res;
         }
+        public List<SODetails> GetSODetailsFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        {
+            List<SODetails> ResultSet = new List<SODetails>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@UserType", data.UserType);
+                    param.Add("@CustomerCode", data.CustomerCode);
+                    param.Add("@SoNo", data.SoNo);
+                    ResultSet = connection.Query<SODetails>("SP_GetSoDetailsFromCustAndSo", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
+        public List<SODetails> GetSODetailsFromJobnoAndSo(RequestSODetailsFromJobnoAndSo data)
+        {
+            List<SODetails> ResultSet = new List<SODetails>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@UserID", data.UserID);
+                    param.Add("@JobNo", data.JobNo);
+                    param.Add("@SoNo", data.SoNo);
+                    ResultSet = connection.Query<SODetails>("SP_GetJobDetailsFromJobnoAndSo", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
+        
 
     }
 }

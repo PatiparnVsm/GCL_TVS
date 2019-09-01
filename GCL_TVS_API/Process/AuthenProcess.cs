@@ -12,20 +12,14 @@ namespace GCL_TVS_API.Process
             get { return (_tokenDAL == null) ? _tokenDAL = new AuthenDAL() : _tokenDAL; }
         }
 
-        private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
-
-        private static string _expireMinutes = null;
-        private static string expireMinutes
+        private static Utility _util = null;
+        private static Utility util
         {
-            get
-            {
-                if (_expireMinutes == null)
-                {
-                    _expireMinutes = System.Configuration.ConfigurationManager.AppSettings["tokenExpiry"];
-                }
-                return _expireMinutes;
-            }
+            get { return (_util == null) ? _util = new Utility() : _util; }
         }
+        
+
+        private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
 
         public ResponseToken GenerateToken(RequestToken data)
         {
@@ -33,7 +27,7 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (IsGuid(data.systemId))
+                if (util.IsGuid(data.systemId))
                 {
                     res.tokenId = tokenDAL.GetToken(data.systemId);
                 }
@@ -46,7 +40,7 @@ namespace GCL_TVS_API.Process
             return res;
         }
 
-        public ResponseToken GenerateTokenByUser(RequestToken data)
+        public ResponseToken GenerateTokenByUser(AuthenByUser data)
         {
             ResponseToken res = new ResponseToken();
 
@@ -62,12 +56,6 @@ namespace GCL_TVS_API.Process
 
             return res;
         }
-
-        public bool IsGuid(string value)
-        {
-            Guid x;
-            return Guid.TryParse(value, out x);
-        }
-
+               
     }
 }

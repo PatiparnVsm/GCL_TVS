@@ -1,44 +1,13 @@
 ﻿using CIMB.DSE.ML.DAL;
 using Dapper;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API.DAL
 {
     public class AuthenDAL : BaseConnection
-    {
-        public bool AuthenCheck(RequestToken data)
-        {
-            ////
-            bool result = false;
-            using (IDbConnection connection = GetOpenConnection())
-            {
-                try
-                {
-                    string sql = @"SELECT count(1) FROM [dbo].[SystemsConnect] WHERE [SystemCode] = @SystemCode";
-
-                    if (connection.ExecuteScalar<int>(sql, new { SystemCode = data.systemId, Username = data.userName, Password = data.password }) > 0)
-                    {
-                        result = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    if (connection != null)
-                    {
-                        connection.Close();
-                    }
-                }
-            }
-            return result;
-        }
+    {      
 
         public string GetToken(string systemCode)
         {
@@ -52,7 +21,7 @@ namespace GCL_TVS_API.DAL
                     param.Add("@SystemID", systemCode);
                     param.Add("TokenId", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
                     connection.Query<string>("SP_GenerateTokenBySystemId", param, commandType: CommandType.StoredProcedure);
-                    tokenId = param.Get<string>("TokenId");                   
+                    tokenId = param.Get<string>("TokenId");
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +38,7 @@ namespace GCL_TVS_API.DAL
             }
         }
 
-        public string GetTokenbyUser(string username,string password)
+        public string GetTokenbyUser(string username, string password)
         {
             string tokenId = string.Empty;
 
@@ -97,6 +66,36 @@ namespace GCL_TVS_API.DAL
                 }
                 return tokenId;
             }
+        }
+
+        public bool ValidateToken(string token)
+        {
+            bool result = false;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"SELECT dbo.fn_CheckTokenId(@token)";
+
+                    var resultCode = connection.ExecuteScalar<string>(sql, new { token = token });
+                    if (resultCode == "00")
+                    {
+                        result = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return result;
         }
     }
 }

@@ -17,5 +17,21 @@ namespace GCL_TVS_API.Models
             public List<SODetails> sODetails { get; set; }
             public string responseMSG { get; set; }
         }
+
+        public class RequestSODetailsFromCustAndSo
+        {
+            public string TokenID { get; set; }
+            public string UserType { get; set; }
+            public string CustomerCode { get; set; }
+            public string SoNo { get; set; }
+        }
+
+        public class RequestSODetailsFromJobnoAndSo
+        {
+            public string TokenID { get; set; }
+            public string UserID { get; set; }
+            public string JobNo { get; set; }
+            public string SoNo { get; set; }
+        }
     }
 }
