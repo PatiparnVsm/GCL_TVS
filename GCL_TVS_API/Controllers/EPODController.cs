@@ -32,13 +32,13 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponsePictureSize GetPicturesList([FromBody] RequestPictureSize data)
+        public ResponsePictureList GetPicturesList([FromBody] RequestPictureList data)
         {
             ResponsePictureSize res = new ResponsePictureSize();
 
             try
             {
-                res = process.GetPictureSize(data);
+                res = process.GetPicturesList(data);
             }
             catch (Exception ex)
             {

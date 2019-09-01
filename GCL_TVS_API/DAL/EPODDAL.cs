@@ -95,5 +95,29 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
+
+        public List<PictureList> GetPicturesList(RequestPictureList data)
+        {
+            List<PictureList> ResultSet = new List<PictureList>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"SELECT A.TVPictureID,A.PictureID,B.PictureSequence,B.PictureName
+                                   FROM TruckVisualPictures A
+                                   INNER JOIN MasterPictures B ON A.PictureID = B.PictureID
+                                   WHERE a.JobOrderID = @JobOrderID
+                                   AND b.IsActive = 1 
+                                        ";
+                    ResultSet = connection.Query<PictureList>(sql, new { JobOrderID = data.JobOrderID }).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return ResultSet;
+        }
     }
 }

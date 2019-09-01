@@ -34,7 +34,7 @@ namespace GCL_TVS_API.Process
                 {
                     response.Size = EPODDAL.GetPicturesize(data);
 
-                    if(!string.IsNullOrEmpty(response.Size))
+                    if (!string.IsNullOrEmpty(response.Size))
                     {
                         response.responseCode = "00";
                         response.responseMSG = "Success";
@@ -44,7 +44,7 @@ namespace GCL_TVS_API.Process
                         response.responseCode = "01";
                         response.responseMSG = "Don't have Configuration or Configuration isn't active";
                     }
-                    
+
                 }
                 else
                 {
@@ -58,6 +58,29 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+        public ResponsePictureList GetPicturesList(RequestPictureList data)
+        {
+            ResponsePictureList response = new ResponsePictureList();
+            try
+            {
+                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
+                {
+                    response.pictures = EPODDAL.GetPicturesList(data);
+                    response.responseCode = "00";
+                    response.responseMSG = "Success";
 
+                }
+                else
+                {
+                    response.responseCode = "99";
+                    response.responseMSG = "tokenId expire or invalid";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
     }
 }
