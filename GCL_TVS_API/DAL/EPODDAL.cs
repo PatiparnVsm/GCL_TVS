@@ -42,24 +42,50 @@ namespace GCL_TVS_API.DAL
 
         }
 
-        public List<ResSurverList> GetSurveyList(SurverList data)
+        public List<SurverListObj> GetSurveyList(SurverList data)
         {
-            List<ResSurverList> ResultSet = new List<ResSurverList>();
+            List<SurverListObj> ResultSet = new List<SurverListObj>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
-                    string sql = @"SELECT a.tvsurveyld, 
-                                       a.surveyld, 
-                                       b.surveysequence, 
-                                       b.surveyname 
-                                FROM   truckvisualsurveys AS a, 
-                                       mastersurveys AS b 
-                                WHERE  a.surveyld = b.surveyld 
-                                       AND a.joborderld = @joborderld
-                                       AND b.isactive = 1 
+                    string sql = @"SELECT a.TVSurveylD, 
+                                       a.SurveylD, 
+                                       b.SurveySequence, 
+                                       b.SurveyName 
+                                FROM   TruckVisualSurveys  AS a, 
+                                       MasterSurveys  AS b 
+                                WHERE  a.SurveylD = b.SurveylD 
+                                       AND a.JobOrderlD = @JobOrderlD
+                                       AND b.IsActive = 1 
                                         ";
-                    //ResultSet = connection.Query<SODetails>(sql, param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SurverListObj>(sql, new { JobOrderlD = data.JobOrderID}, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return ResultSet;
+        }
+
+        public List<ActivitieListObj> GetActivityList(ActivitieList data)
+        {
+            List<ActivitieListObj> ResultSet = new List<ActivitieListObj>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"select a.TVActivitylD, a.ProcessStatuslD, b.ProcessStatusSeq,
+                                            b.ProcessStatusName, a.ProcessOn
+                                   from TruckVisualActivities as a, MasterProcessStatus as b, Users as c
+                                   where a.ProcessStatuslD = b.ProcessStatuslD
+                                            And a.DriverlD = c.DriverlD
+                                            And a.JobOrderlD = @JobOrderlD
+                                            And c.UserlD = @UserlD 
+                                        ";
+                    ResultSet = connection.Query<ActivitieListObj>(sql, new { JobOrderlD = data.JobOrderID, UserlD = data.UserlD }, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

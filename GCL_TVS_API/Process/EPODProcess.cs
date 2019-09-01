@@ -1,8 +1,7 @@
 ﻿using GCL_TVS_API.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using static GCL_TVS_API.Models.EPOD;
+using static GCL_TVS_API.Models.SODetailsService;
 
 namespace GCL_TVS_API.Process
 {
@@ -24,14 +23,14 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
-        public ResponseSODetails GetdataSOFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        public ResponseSODetails GetdataJobFromCustAndSo(RequestJobDetailsFromJobnoAndSo data)
         {
             ResponseSODetails response = new ResponseSODetails();
             try
             {
                 if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
                 {
-                    response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
+                    response.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
                     response.responseCode = "00";
                     response.responseMSG = "Success";
                 }
@@ -46,6 +45,56 @@ namespace GCL_TVS_API.Process
                 throw ex;
             }
             return response;
+        }
+
+        public ResSurverList GetSurverList(SurverList data)
+        {
+            ResSurverList res = new ResSurverList();
+
+            try
+            {
+                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
+                {
+                    res.ObjSurverList = EPODDAL.GetSurveyList(data);
+                    res.responseCode = "00";
+                    res.responseMSG = "Success";
+                }
+                else
+                {
+                    res.responseCode = "99";
+                    res.responseMSG = "tokenId expire or invalid";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
+
+        public ResActivitieList GetActivitieList(ActivitieList data)
+        {
+            ResActivitieList res = new ResActivitieList();
+
+            try
+            {
+                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
+                {
+                    res.ObjActivitiesList = EPODDAL.GetActivityList(data);
+                    res.responseCode = "00";
+                    res.responseMSG = "Success";
+                }
+                else
+                {
+                    res.responseCode = "99";
+                    res.responseMSG = "tokenId expire or invalid";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
         }
 
     }
