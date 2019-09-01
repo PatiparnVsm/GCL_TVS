@@ -8,10 +8,10 @@ namespace GCL_TVS_API.Controllers
 {
     public class EPODController : ApiController
     {
-        private static GetSODetailsProcess _process = null;
-        private static GetSODetailsProcess process
+        private static EPODProcess _process = null;
+        private static EPODProcess process
         {
-            get { return (_process == null) ? _process = new GetSODetailsProcess() : _process; }
+            get { return (_process == null) ? _process = new EPODProcess() : _process; }
         }
 
         [HttpPost]
@@ -19,33 +19,34 @@ namespace GCL_TVS_API.Controllers
         {
             ResponsePictureSize res = new ResponsePictureSize();
 
-            //try
-            //{
-            //    res = process.GetdataSOFromCustAndSo(data);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+            try
+            {
+                res = process.GetPictureSize(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return res;
         }
 
-        //[HttpPost]
-        //public ResponseSODetails GetSoDetailsFromJobnoAndSo([FromBody] RequestSODetailsFromJobnoAndSo data)
-        //{
-        //    ResponseSODetails res = new ResponseSODetails();
+        [HttpPost]
+        public ResponsePictureSize GetPicturesList([FromBody] RequestPictureSize data)
+        {
+            ResponsePictureSize res = new ResponsePictureSize();
 
-        //    try
-        //    {
-        //        res = process.GetdataSOFromJobnoAndSo(data);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
+            try
+            {
+                res = process.GetPictureSize(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-        //    return res;
-        //}
+            return res;
+        }
+
     }
 }

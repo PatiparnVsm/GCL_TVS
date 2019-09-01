@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static GCL_TVS_API.Models.Picture;
 
 namespace GCL_TVS_API.Process
 {
@@ -24,16 +25,26 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
-        public ResponseSODetails GetdataSOFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        public ResponsePictureSize GetPictureSize(RequestPictureSize data)
         {
-            ResponseSODetails response = new ResponseSODetails();
+            ResponsePictureSize response = new ResponsePictureSize();
             try
             {
                 if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
                 {
-                    response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
+                    response.Size = EPODDAL.GetPicturesize(data);
+
+                    if(!string.IsNullOrEmpty(response.Size))
+                    {
+                        response.responseCode = "00";
+                        response.responseMSG = "Success";
+                    }
+                    else
+                    {
+                        response.responseCode = "01";
+                        response.responseMSG = "Don't have Configuration or Configuration isn't active";
+                    }
+                    
                 }
                 else
                 {
