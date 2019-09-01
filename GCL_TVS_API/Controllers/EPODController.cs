@@ -34,7 +34,7 @@ namespace GCL_TVS_API.Controllers
         [HttpPost]
         public ResponsePictureList GetPicturesList([FromBody] RequestPictureList data)
         {
-            ResponsePictureSize res = new ResponsePictureSize();
+            ResponsePictureList res = new ResponsePictureList();
 
             try
             {
