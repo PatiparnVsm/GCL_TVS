@@ -1,4 +1,4 @@
-﻿using GCL_TVS_API.DAL;
+﻿using GCL_TVS_API.Filters;
 using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
@@ -14,6 +14,7 @@ namespace GCL_TVS_API.Controllers
             get { return (_process == null) ? _process = new AuthenProcess() : _process; }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ResponseToken SystemAuthen([FromBody] RequestToken data)
         {
@@ -23,22 +24,23 @@ namespace GCL_TVS_API.Controllers
             {
                 res = process.GenerateToken(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
 
-         
-   return res;
+
+            return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponseTokenByUser UserAuthen([FromBody] AuthenByUser data)
         {
             ResponseTokenByUser res = new ResponseTokenByUser();
-            
+
             try
-            {                
+            {
                 res = process.GenerateTokenByUser(data);
             }
             catch (Exception ex)

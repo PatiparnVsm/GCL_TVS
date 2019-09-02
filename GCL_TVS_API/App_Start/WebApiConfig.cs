@@ -9,6 +9,7 @@ namespace GCL_TVS_API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Filters.Add(new AuthorizeAttribute());
 
             //Handler Custom Exception
             config.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());

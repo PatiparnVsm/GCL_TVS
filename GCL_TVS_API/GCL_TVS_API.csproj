@@ -172,9 +172,14 @@
     <Compile Include="DAL\Utility.cs" />
     <Compile Include="ExceptionHandler\CustomExceptionHandler.cs" />
     <Compile Include="ExceptionHandler\CustomExceptionLog.cs" />
+    <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Filters\AuthenticationFailureResult.cs" />
+    <Compile Include="Filters\HttpAuthenticationChallengeContextExtensions.cs" />
+    <Compile Include="Filters\JwtAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="JwtManager.cs" />
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\PictureList.cs" />
     <Compile Include="Models\Picture.cs" />

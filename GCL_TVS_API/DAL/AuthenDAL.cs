@@ -2,7 +2,6 @@
 using Dapper;
 using GCL_TVS_API.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using static GCL_TVS_API.Models.Token;
@@ -52,7 +51,7 @@ namespace GCL_TVS_API.DAL
                     param.Add("@Username", username);
                     param.Add("@Password", hashPassword);
                     res = connection.Query<Token.ResponseTokenByUser>("SP_GenerateTokenByUser", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -98,6 +97,39 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
-        
+
+        public bool ValidateSystemId(string systemId)
+        {
+            bool result = false;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"SELECT count(1)
+                                    FROM SystemsConnect
+                                    WHERE systemID = @systemId
+                                    ";
+
+                    var rowCount = connection.ExecuteScalar<int>(sql, new { systemId = systemId });
+                    if (rowCount > 0)
+                    {
+                        result = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }

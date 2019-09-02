@@ -29,7 +29,11 @@ namespace GCL_TVS_API.Process
             {
                 if (util.IsGuid(data.systemId))
                 {
-                    res.tokenId = tokenDAL.GetToken(data.systemId);
+                    var resultValidate = tokenDAL.ValidateSystemId(data.systemId);
+                    if(resultValidate == true)
+                    {
+                        res.tokenId = JwtManager.GenerateToken();
+                    }
                 }
             }
             catch (Exception ex)
