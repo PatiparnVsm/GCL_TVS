@@ -20,7 +20,7 @@ namespace CIMB.DSE.ML.Logs
                 NLog.MappedDiagnosticsContext.Set("Application", data.Application);
                 NLog.MappedDiagnosticsContext.Set("ControllerName", data.ControllerName);
                 NLog.MappedDiagnosticsContext.Set("ActionName", data.ActionName);
-                NLog.MappedDiagnosticsContext.Set("UserID", data.UserID);
+                //NLog.MappedDiagnosticsContext.Set("UserID", data.UserID);
                 NLog.MappedDiagnosticsContext.Set("Machine", data.Machine);
                 NLog.MappedDiagnosticsContext.Set("MachineIpAddress", data.MachineIpAddress);
                 NLog.MappedDiagnosticsContext.Set("RequestIpAddress", data.RequestIpAddress);
