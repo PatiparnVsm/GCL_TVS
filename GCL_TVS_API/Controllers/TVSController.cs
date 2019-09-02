@@ -6,7 +6,7 @@ using static GCL_TVS_API.Models.SODetailsUrl;
 
 namespace GCL_TVS_API.Controllers
 {
-    public class SOController : ApiController
+    public class TVSController : ApiController
     {
         private static GetSODetailsProcess _process = null;
         private static GetSODetailsProcess process
