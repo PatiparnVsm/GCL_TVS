@@ -12,7 +12,7 @@ namespace CIMB.DSE.ML.Logs
         public string Application { get; set; }             // The application that made the request.
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
-        public string UserID { get; set; }                    // The user that made the request.
+        //public string UserID { get; set; }                    // The user that made the request.
         public string Machine { get; set; }                 // The machine that made the request.
         public string MachineIpAddress { get; set; }
         public string ApiPath { get; set; }

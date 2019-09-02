@@ -88,7 +88,7 @@ namespace CIMB.DSE.ML.API.Internal
             return new TRACE_LOG_WEB_API
             {
                 Application = _appName,/*"เดี๋ยวมาใส่ตอนทำ OAuth2",*/
-                UserID = _userName, /*context.User.Identity.Name,*/
+                //UserID = _userName, /*context.User.Identity.Name,*/
                 Machine = Environment.MachineName,
                 MachineIpAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString(),
                 ControllerName = string.Format("{0}", controller),
