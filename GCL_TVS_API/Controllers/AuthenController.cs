@@ -33,7 +33,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseTokenByUser UserAuthen([FromBody] AuthenByUser data)
         {

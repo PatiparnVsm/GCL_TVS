@@ -1,4 +1,5 @@
-﻿using GCL_TVS_API.Process;
+﻿using GCL_TVS_API.Filters;
+using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.EPOD;
@@ -15,6 +16,7 @@ namespace GCL_TVS_API.Controllers
             get { return (_process == null) ? _process = new EPODProcess() : _process; }
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponsePictureSize GetPictureSize([FromBody] RequestPictureSize data)
         {
@@ -32,6 +34,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponsePictureList GetPicturesList([FromBody] RequestPictureList data)
         {
@@ -49,6 +52,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponseSODetails GetJobDetailsFromJobnoAndSo([FromBody] RequestJobDetailsFromJobnoAndSo data)
         {
@@ -66,6 +70,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResSurverList GetSurveysList([FromBody] SurverList data)
         {
@@ -83,6 +88,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResActivitieList GetActivityList([FromBody] ActivitieList data)
         {

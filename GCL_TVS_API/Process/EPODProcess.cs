@@ -32,7 +32,7 @@ namespace GCL_TVS_API.Process
             ResponsePictureSize response = new ResponsePictureSize();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
+                if (Utility.IsGuid(data.TokenID))
                 {
                     response.Size = EPODDAL.GetPicturesize(data);
 
@@ -60,12 +60,13 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+
         public ResponsePictureList GetPicturesList(RequestPictureList data)
         {
             ResponsePictureList response = new ResponsePictureList();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
+                if (Utility.IsGuid(data.TokenID))
                 {
                     response.pictures = EPODDAL.GetPicturesList(data);
                     response.responseCode = "00";
@@ -91,7 +92,7 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
+                if (Utility.IsGuid(data.TokenId))
                 {
                     res.ObjSurverList = EPODDAL.GetSurveyList(data);
                     res.responseCode = "00";
@@ -116,7 +117,7 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
+                if (Utility.IsGuid(data.TokenId))
                 {
                     res.ObjActivitiesList = EPODDAL.GetActivityList(data);
                     res.responseCode = "00";
@@ -140,7 +141,7 @@ namespace GCL_TVS_API.Process
             ResponseSODetails response = new ResponseSODetails();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
+                if (Utility.IsGuid(data.TokenID))
                 {
                     response.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
                     response.responseCode = "00";
