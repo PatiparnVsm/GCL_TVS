@@ -38,7 +38,7 @@ namespace GCL_TVS_API.Process
                 var res = SODAL.ValidateSODetails(data);
                 response.responseCode = res.Code;
                 response.responseMSG = res.Msg;
-
+                //00 = Success,01 = Not found SalesOrders or CustomerCode
                 if (response.responseCode == "00")
                 {
                     var reqParams = GenerateReqparams(data);
