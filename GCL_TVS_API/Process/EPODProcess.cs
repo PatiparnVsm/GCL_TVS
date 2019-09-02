@@ -1,8 +1,5 @@
 ﻿using GCL_TVS_API.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
 using static GCL_TVS_API.Models.SODetailsService;
@@ -32,26 +29,17 @@ namespace GCL_TVS_API.Process
             ResponsePictureSize response = new ResponsePictureSize();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
+                response.Size = EPODDAL.GetPicturesize(data);
+
+                if (!string.IsNullOrEmpty(response.Size))
                 {
-                    response.Size = EPODDAL.GetPicturesize(data);
-
-                    if (!string.IsNullOrEmpty(response.Size))
-                    {
-                        response.responseCode = "00";
-                        response.responseMSG = "Success";
-                    }
-                    else
-                    {
-                        response.responseCode = "01";
-                        response.responseMSG = "Don't have Configuration or Configuration isn't active";
-                    }
-
+                    response.responseCode = "00";
+                    response.responseMSG = "Success";
                 }
                 else
                 {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
+                    response.responseCode = "01";
+                    response.responseMSG = "Don't have Configuration or Configuration isn't active";
                 }
             }
             catch (Exception ex)
@@ -60,23 +48,15 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+
         public ResponsePictureList GetPicturesList(RequestPictureList data)
         {
             ResponsePictureList response = new ResponsePictureList();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
-                {
-                    response.pictures = EPODDAL.GetPicturesList(data);
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
-
-                }
-                else
-                {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
-                }
+                response.pictures = EPODDAL.GetPicturesList(data);
+                response.responseCode = "00";
+                response.responseMSG = "Success";
             }
             catch (Exception ex)
             {
@@ -91,17 +71,9 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
-                {
-                    res.ObjSurverList = EPODDAL.GetSurveyList(data);
-                    res.responseCode = "00";
-                    res.responseMSG = "Success";
-                }
-                else
-                {
-                    res.responseCode = "99";
-                    res.responseMSG = "tokenId expire or invalid";
-                }
+                res.ObjSurverList = EPODDAL.GetSurveyList(data);
+                res.responseCode = "00";
+                res.responseMSG = "Success";
             }
             catch (Exception ex)
             {
@@ -116,17 +88,9 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (Utility.IsGuid(data.TokenId) && AuthenDal.ValidateToken(data.TokenId))
-                {
-                    res.ObjActivitiesList = EPODDAL.GetActivityList(data);
-                    res.responseCode = "00";
-                    res.responseMSG = "Success";
-                }
-                else
-                {
-                    res.responseCode = "99";
-                    res.responseMSG = "tokenId expire or invalid";
-                }
+                res.ObjActivitiesList = EPODDAL.GetActivityList(data);
+                res.responseCode = "00";
+                res.responseMSG = "Success";
             }
             catch (Exception ex)
             {
@@ -140,17 +104,9 @@ namespace GCL_TVS_API.Process
             ResponseSODetails response = new ResponseSODetails();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
-                {
-                    response.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
-                }
-                else
-                {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
-                }
+                response.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
+                response.responseCode = "00";
+                response.responseMSG = "Success";
             }
             catch (Exception ex)
             {
