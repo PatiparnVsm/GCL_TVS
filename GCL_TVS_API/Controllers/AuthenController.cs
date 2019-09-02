@@ -27,8 +27,8 @@ namespace GCL_TVS_API.Controllers
                 {
                     res = new ErrorAuthen();
                     res.status = new StatusError();
-                    res.status.code = "01";
-                    res.status.code = "SystemID invalid";
+                    res.status.code = "204";
+                    res.status.message = "SystemID invalid";
                 }
             }
             catch(Exception ex)
@@ -53,8 +53,8 @@ namespace GCL_TVS_API.Controllers
                 {
                     res = new ErrorAuthen();
                     res.status = new StatusError();
-                    res.status.code = "01";
-                    res.status.code = "Username or Password invalid";
+                    res.status.code = "204";
+                    res.status.message = "Username or Password invalid";
                 }
             }
             catch (Exception ex)
