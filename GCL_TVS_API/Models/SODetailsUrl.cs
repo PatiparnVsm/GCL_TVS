@@ -9,7 +9,6 @@ namespace GCL_TVS_API.Models
     {
         public class RequestUrl
         {
-            public string tokenId { get; set; }
             public string customerCode { get; set; }
             public string soNo { get; set; }
         }

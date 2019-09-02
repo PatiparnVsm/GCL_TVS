@@ -20,7 +20,6 @@ namespace GCL_TVS_API.Models
 
         public class RequestSODetailsFromCustAndSo
         {
-            public string TokenID { get; set; }
             public string UserType { get; set; }
             public string CustomerCode { get; set; }
             public string SoNo { get; set; }

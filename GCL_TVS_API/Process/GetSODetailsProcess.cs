@@ -42,9 +42,9 @@ namespace GCL_TVS_API.Process
                 if (response.responseCode == "00")
                 {
                     var reqParams = GenerateReqparams(data);
-                    string hashParams = Utility.HashData(reqParams);
+                    string hashParams = Utility.HashData(Guid.NewGuid().ToString());
 
-                    SODAL.InsLogReq(data.tokenId, reqParams, hashParams);
+                    SODAL.InsLogReq(reqParams, hashParams);
 
                     hashParams = HttpUtility.UrlEncode(hashParams);
                     response.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
@@ -79,7 +79,7 @@ namespace GCL_TVS_API.Process
                     response.responseMSG = "tokenId expire or invalid";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -91,17 +91,11 @@ namespace GCL_TVS_API.Process
             ResponseSODetails response = new ResponseSODetails();
             try
             {
-                if (Utility.IsGuid(data.TokenID) && AuthenDal.ValidateToken(data.TokenID))
-                {
-                    response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
-                }
-                else
-                {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
-                }
+
+                response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
+                response.responseCode = "00";
+                response.responseMSG = "Success";
+
             }
             catch (Exception ex)
             {
@@ -110,8 +104,8 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-       
-            
+
+
         private string GenerateReqparams(object data)
         {
             string reqParam = string.Empty;

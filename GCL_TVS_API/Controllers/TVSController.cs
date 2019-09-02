@@ -1,4 +1,5 @@
-﻿using GCL_TVS_API.Process;
+﻿using GCL_TVS_API.Filters;
+using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.SODetailsService;
@@ -14,6 +15,7 @@ namespace GCL_TVS_API.Controllers
             get { return (_process == null) ? _process = new GetSODetailsProcess() : _process; }
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponseUrl GetSODetails([FromBody] RequestUrl data)
         {
@@ -30,6 +32,8 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public ResponseSODetails GetSODetailsFromHash([FromBody] RequestSODetails data)
         {
@@ -47,6 +51,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponseSODetails GetSoDetailsFromCustAndSo([FromBody] RequestSODetailsFromCustAndSo data)
         {

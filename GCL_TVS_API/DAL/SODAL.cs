@@ -49,8 +49,8 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"SELECT RequestParam FROM SystemsTokensRequest WHERE ResponseParam = @ResponseParam and TerminateOn >= getdate()";
-                    string RequestParam = connection.Query<string>(sql, new { ResponseParam = hashParams }).FirstOrDefault();
+                    string sql = @"SELECT RequestParam FROM SystemHashURLRequest WHERE HashUrlID = @HashUrlID and TerminateOn >= getdate()";
+                    string RequestParam = connection.Query<string>(sql, new { HashUrlID = hashParams }).FirstOrDefault();
                     if (!string.IsNullOrEmpty(RequestParam))
                     {
                         result = RequestParam;
@@ -70,16 +70,15 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
-        public void InsLogReq(string tokenId, string reqParams, string hashParams)
+        public void InsLogReq( string reqParams, string hashParams)
         {
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
                     var param = new DynamicParameters();
-                    param.Add("@TokenID", tokenId);
+                    param.Add("@Hash", hashParams);
                     param.Add("@RequestParam", reqParams);
-                    param.Add("@ResponseParam", hashParams);
                     param.Add("@CreatedBy", "InsLogReq");
                     connection.Query<string>("SP_InsLogRequest", param, commandType: CommandType.StoredProcedure);
                 }
@@ -104,7 +103,7 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     var param = new DynamicParameters();
-                    for (var i = 1; i < data.Length; i++)
+                    for (var i = 0; i < data.Length; i++)
                     {
                         var arrData = data[i].Split('=');
                         param.Add("@" + arrData[0], arrData[1]);
@@ -136,10 +135,9 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     var param = new DynamicParameters();
-                    param.Add("@TokenID", data.tokenId);
                     param.Add("@SONO", data.soNo);
                     param.Add("@CompanyCode", data.customerCode);
-                    res = connection.Query<SODetailsUrl.ResSP>("SP_CheckTokenIdAndSONO", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    res = connection.Query<SODetailsUrl.ResSP>("SP_CheckSONO", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
