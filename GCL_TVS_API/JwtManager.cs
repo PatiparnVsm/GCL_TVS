@@ -1,11 +1,9 @@
 ﻿
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Web;
+using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API
 {
@@ -17,7 +15,7 @@ namespace GCL_TVS_API
         ///     var key = Convert.ToBase64String(hmac.Key);
         /// </summary>
         private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
-
+        private static DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private static string _expireMinutes = null;
         private static string expireMinutes
         {
@@ -31,9 +29,9 @@ namespace GCL_TVS_API
             }
         }
 
-        public static string GenerateToken()
+        public static ResponseToken GenerateToken()
         {
-
+            ResponseToken res = new ResponseToken();
             var symmetricKey = Convert.FromBase64String(Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
             var now = DateTime.UtcNow;
@@ -49,9 +47,36 @@ namespace GCL_TVS_API
             };
 
             var stoken = tokenHandler.CreateToken(tokenDescriptor);
-            var token = tokenHandler.WriteToken(stoken);
 
-            return token;
+            res.access_token = tokenHandler.WriteToken(stoken);
+            res.expires_in = (long)ConvertDateimeToUnixTime(stoken.ValidTo);
+
+            return res;
+        }
+
+        public static ResponseToken GenerateTokenByUser()
+        {
+            ResponseToken res = new ResponseToken();
+            var symmetricKey = Convert.FromBase64String(Secret);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var now = DateTime.UtcNow;
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                    {
+                            new Claim(ClaimTypes.Name, "GCL_TVS")
+                        }),
+                Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var stoken = tokenHandler.CreateToken(tokenDescriptor);
+
+            res.access_token = tokenHandler.WriteToken(stoken);
+            res.expires_in = (long)ConvertDateimeToUnixTime(stoken.ValidTo);
+
+            return res;
         }
 
         public static ClaimsPrincipal GetPrincipal(string token)
@@ -86,6 +111,13 @@ namespace GCL_TVS_API
             {
                 return null;
             }
+        }
+
+        private static double ConvertDateimeToUnixTime(DateTime dt)
+        {
+            var dateTime = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, DateTimeKind.Utc);
+            TimeSpan diff = dateTime.ToUniversalTime() - origin;
+            return Math.Round(diff.TotalSeconds);
         }
     }
 

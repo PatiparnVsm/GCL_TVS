@@ -9,23 +9,24 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Results;
+using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API
 {
     public class CustomExceptionHandler : ExceptionHandler
     {
-        //public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
-        //{
-            //ResponseInfo<string> result = new ResponseInfo<string>();
-            //result.ResponseCode = "999";
+        public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
+        {
+            StatusError result = new StatusError();
+            //result.ResponseCode = "99";
             //result.ResponseMsg = "system exception!";
 
-            //var response = context.Request.CreateResponse(HttpStatusCode.InternalServerError, result);
+            var response = context.Request.CreateResponse(HttpStatusCode.InternalServerError, result);
 
-            //context.Result = new ResponseMessageResult(response);
+            context.Result = new ResponseMessageResult(response);
 
-            //return base.HandleAsync(context, cancellationToken);
-        //}
+            return base.HandleAsync(context, cancellationToken);
+        }
 
         public virtual bool ShouldHandle(ExceptionHandlerContext context)
         {

@@ -16,32 +16,46 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseToken SystemAuthen([FromBody] RequestToken data)
+        public dynamic SystemAuthen([FromBody] RequestToken data)
         {
-            ResponseToken res = new ResponseToken();
+            dynamic res = null;
 
             try
             {
                 res = process.GenerateToken(data);
+                if(res.access_token == null)
+                {
+                    res = new ErrorAuthen();
+                    res.status = new StatusError();
+                    res.status.code = "01";
+                    res.status.code = "SystemID invalid";
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw ex;
             }
-
 
             return res;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseTokenByUser UserAuthen([FromBody] AuthenByUser data)
+        public dynamic UserAuthen([FromBody] AuthenByUser data)
         {
-            ResponseTokenByUser res = new ResponseTokenByUser();
+            dynamic res = null;
 
             try
             {
+                res = new ResponseTokenByUser();
                 res = process.GenerateTokenByUser(data);
+                if (res.access_token == null)
+                {
+                    res = new ErrorAuthen();
+                    res.status = new StatusError();
+                    res.status.code = "01";
+                    res.status.code = "Username or Password invalid";
+                }
             }
             catch (Exception ex)
             {

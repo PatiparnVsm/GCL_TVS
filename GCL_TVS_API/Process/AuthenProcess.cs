@@ -17,9 +17,9 @@ namespace GCL_TVS_API.Process
         {
             get { return (_util == null) ? _util = new Utility() : _util; }
         }
-        
 
-        private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
+
+        //private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
 
         public ResponseToken GenerateToken(RequestToken data)
         {
@@ -27,12 +27,12 @@ namespace GCL_TVS_API.Process
 
             try
             {
-                if (util.IsGuid(data.systemId))
+                if (util.IsGuid(data.SystemID))
                 {
-                    var resultValidate = tokenDAL.ValidateSystemId(data.systemId);
-                    if(resultValidate == true)
+                    var resultValidate = tokenDAL.ValidateSystemId(data.SystemID);
+                    if (resultValidate == true)
                     {
-                        res.tokenId = JwtManager.GenerateToken();
+                        res = JwtManager.GenerateToken();
                     }
                 }
             }
@@ -53,7 +53,13 @@ namespace GCL_TVS_API.Process
                 //Hash Password
                 var hashPassword = util.Postclient(data);
 
-                res = tokenDAL.GetTokenbyUser(data.UserName, hashPassword);
+                res = tokenDAL.GetUserDetails(data.UserName, hashPassword);
+                if (res.UserID != null)
+                {
+                    var token = JwtManager.GenerateToken();
+                    res.access_token = token.access_token;
+                    res.expires_in = token.expires_in;
+                }
             }
             catch (Exception ex)
             {
@@ -62,6 +68,6 @@ namespace GCL_TVS_API.Process
 
             return res;
         }
-               
+
     }
 }

@@ -40,7 +40,7 @@ namespace GCL_TVS_API.DAL
             }
         }
 
-        public ResponseTokenByUser GetTokenbyUser(string username, string hashPassword)
+        public ResponseTokenByUser GetUserDetails(string username, string hashPassword)
         {
             ResponseTokenByUser res = new ResponseTokenByUser();
             using (IDbConnection connection = GetOpenConnection())
