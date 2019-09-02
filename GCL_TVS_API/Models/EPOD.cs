@@ -9,7 +9,6 @@ namespace GCL_TVS_API.Models
     {
         public class RequestJobDetailsFromJobnoAndSo
         {
-            public string TokenID { get; set; }
             public string UserID { get; set; }
             public string JobNo { get; set; }
             public string SoNo { get; set; }
@@ -17,7 +16,6 @@ namespace GCL_TVS_API.Models
 
         public class SurverList
         {
-            public string TokenId { get; set; }
             public string JobOrderID { get; set; }
         }
 
@@ -38,7 +36,6 @@ namespace GCL_TVS_API.Models
 
         public class ActivitieList
         {
-            public string TokenId { get; set; }
             public string JobOrderID { get; set; }
             public string UserlD { get; set; }            
         }
