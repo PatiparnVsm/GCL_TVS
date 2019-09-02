@@ -1,4 +1,5 @@
-﻿using GCL_TVS_API.Process;
+﻿using GCL_TVS_API.DAL;
+using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.Token;
@@ -32,12 +33,12 @@ namespace GCL_TVS_API.Controllers
         }
 
         [HttpPost]
-        public ResponseToken UserAuthen([FromBody] AuthenByUser data)
+        public ResponseTokenByUser UserAuthen([FromBody] AuthenByUser data)
         {
-            ResponseToken res = new ResponseToken();
-
+            ResponseTokenByUser res = new ResponseTokenByUser();
+            
             try
-            {
+            {                
                 res = process.GenerateTokenByUser(data);
             }
             catch (Exception ex)

@@ -40,14 +40,16 @@ namespace GCL_TVS_API.Process
             return res;
         }
 
-        public ResponseToken GenerateTokenByUser(AuthenByUser data)
+        public ResponseTokenByUser GenerateTokenByUser(AuthenByUser data)
         {
-            ResponseToken res = new ResponseToken();
+            ResponseTokenByUser res = new ResponseTokenByUser();
 
             try
             {
                 //Hash Password
-                res.tokenId = tokenDAL.GetTokenbyUser(data.userName, data.password);
+                var hashPassword = util.Postclient(data);
+
+                res = tokenDAL.GetTokenbyUser(data.UserName, hashPassword);
             }
             catch (Exception ex)
             {

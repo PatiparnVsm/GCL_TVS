@@ -1,13 +1,16 @@
 ﻿using CIMB.DSE.ML.DAL;
 using Dapper;
+using GCL_TVS_API.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API.DAL
 {
     public class AuthenDAL : BaseConnection
-    {      
+    {
 
         public string GetToken(string systemCode)
         {
@@ -38,20 +41,18 @@ namespace GCL_TVS_API.DAL
             }
         }
 
-        public string GetTokenbyUser(string username, string password)
+        public ResponseTokenByUser GetTokenbyUser(string username, string hashPassword)
         {
-            string tokenId = string.Empty;
-
+            ResponseTokenByUser res = new ResponseTokenByUser();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
                     var param = new DynamicParameters();
                     param.Add("@Username", username);
-                    param.Add("@Password", password);
-                    param.Add("TokenId", dbType: DbType.String, direction: ParameterDirection.Output, size: 50);
-                    connection.Query<string>("SP_GenerateTokenByUser", param, commandType: CommandType.StoredProcedure);
-                    tokenId = param.Get<string>("TokenId");
+                    param.Add("@Password", hashPassword);
+                    res = connection.Query<Token.ResponseTokenByUser>("SP_GenerateTokenByUser", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                   
                 }
                 catch (Exception ex)
                 {
@@ -64,7 +65,7 @@ namespace GCL_TVS_API.DAL
                         connection.Close();
                     }
                 }
-                return tokenId;
+                return res;
             }
         }
 
@@ -97,5 +98,6 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
+        
     }
 }
