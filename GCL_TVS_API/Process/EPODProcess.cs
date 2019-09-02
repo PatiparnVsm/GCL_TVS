@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.DAL;
+using GCL_TVS_API.Models;
 using System;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
@@ -24,22 +25,18 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
-        public ResponsePictureSize GetPictureSize(RequestPictureSize data)
+        public ResponseInfo<ResponsePictureSize> GetPictureSize(RequestPictureSize data)
         {
-            ResponsePictureSize response = new ResponsePictureSize();
+            ResponseInfo<ResponsePictureSize> response = new ResponseInfo<ResponsePictureSize>();
             try
             {
-                response.Size = EPODDAL.GetPicturesize(data);
+                response.ResponseData = new ResponsePictureSize();
+                response.ResponseData.Size = EPODDAL.GetPicturesize(data);
 
-                if (!string.IsNullOrEmpty(response.Size))
+                if (string.IsNullOrEmpty(response.ResponseData.Size))
                 {
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
-                }
-                else
-                {
-                    response.responseCode = "01";
-                    response.responseMSG = "Don't have Configuration or Configuration isn't active";
+                    response.ResponseCode = "01";
+                    response.ResponseMsg = "Don't have Configuration or Configuration isn't active";
                 }
             }
             catch (Exception ex)
@@ -49,14 +46,13 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponsePictureList GetPicturesList(RequestPictureList data)
+        public ResponseInfo<ResponsePictureList> GetPicturesList(RequestPictureList data)
         {
-            ResponsePictureList response = new ResponsePictureList();
+            ResponseInfo<ResponsePictureList> response = new ResponseInfo<ResponsePictureList>();
             try
             {
-                response.pictures = EPODDAL.GetPicturesList(data);
-                response.responseCode = "00";
-                response.responseMSG = "Success";
+                response.ResponseData = new ResponsePictureList();
+                response.ResponseData.pictures = EPODDAL.GetPicturesList(data);
             }
             catch (Exception ex)
             {
@@ -65,15 +61,14 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResSurverList GetSurverList(SurverList data)
+        public ResponseInfo<ResSurverList> GetSurverList(SurverList data)
         {
-            ResSurverList res = new ResSurverList();
+            ResponseInfo<ResSurverList> res = new ResponseInfo<ResSurverList>();
 
             try
             {
-                res.ObjSurverList = EPODDAL.GetSurveyList(data);
-                res.responseCode = "00";
-                res.responseMSG = "Success";
+                res.ResponseData = new ResSurverList();
+                res.ResponseData.ObjSurverList = EPODDAL.GetSurveyList(data);
             }
             catch (Exception ex)
             {
@@ -82,15 +77,14 @@ namespace GCL_TVS_API.Process
             return res;
         }
 
-        public ResActivitieList GetActivitieList(ActivitieList data)
+        public ResponseInfo<ResActivitieList> GetActivitieList(ActivitieList data)
         {
-            ResActivitieList res = new ResActivitieList();
+            ResponseInfo<ResActivitieList> res = new ResponseInfo<ResActivitieList>();
 
             try
             {
-                res.ObjActivitiesList = EPODDAL.GetActivityList(data);
-                res.responseCode = "00";
-                res.responseMSG = "Success";
+                res.ResponseData = new ResActivitieList();
+                res.ResponseData.ObjActivitiesList = EPODDAL.GetActivityList(data);
             }
             catch (Exception ex)
             {
@@ -99,14 +93,13 @@ namespace GCL_TVS_API.Process
             return res;
         }
 
-        public ResponseSODetails GetdataJobFromCustAndSo(RequestJobDetailsFromJobnoAndSo data)
+        public ResponseInfo<ResponseSODetails> GetdataJobFromCustAndSo(RequestJobDetailsFromJobnoAndSo data)
         {
-            ResponseSODetails response = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
-                response.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
-                response.responseCode = "00";
-                response.responseMSG = "Success";
+                response.ResponseData = new ResponseSODetails();
+                response.ResponseData.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
             }
             catch (Exception ex)
             {

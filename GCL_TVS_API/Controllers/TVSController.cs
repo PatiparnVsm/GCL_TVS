@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.Filters;
+using GCL_TVS_API.Models;
 using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
@@ -17,9 +18,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseUrl GetSODetails([FromBody] RequestUrl data)
+        public ResponseInfo<ResponseUrl> GetSODetails([FromBody] RequestUrl data)
         {
-            ResponseUrl res = new ResponseUrl();
+            ResponseInfo<ResponseUrl> res = new ResponseInfo<ResponseUrl>();
 
             try
             {
@@ -35,9 +36,9 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseSODetails GetSODetailsFromHash([FromBody] RequestSODetails data)
+        public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] RequestSODetails data)
         {
-            ResponseSODetails res = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails>  res = new ResponseInfo<ResponseSODetails>();
 
             try
             {
@@ -53,9 +54,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseSODetails GetSoDetailsFromCustAndSo([FromBody] RequestSODetailsFromCustAndSo data)
+        public ResponseInfo<ResponseSODetails> GetSoDetailsFromCustAndSo([FromBody] RequestSODetailsFromCustAndSo data)
         {
-            ResponseSODetails res = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
 
             try
             {

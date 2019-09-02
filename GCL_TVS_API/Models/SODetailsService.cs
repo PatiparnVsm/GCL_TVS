@@ -13,9 +13,7 @@ namespace GCL_TVS_API.Models
         }
         public class ResponseSODetails
         {
-            public string responseCode { get; set; }
             public List<SODetails> sODetails { get; set; }
-            public string responseMSG { get; set; }
         }
 
         public class RequestSODetailsFromCustAndSo

@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.Filters;
+using GCL_TVS_API.Models;
 using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
@@ -18,9 +19,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponsePictureSize GetPictureSize([FromBody] RequestPictureSize data)
+        public ResponseInfo<ResponsePictureSize> GetPictureSize([FromBody] RequestPictureSize data)
         {
-            ResponsePictureSize res = new ResponsePictureSize();
+            ResponseInfo<ResponsePictureSize> res = new ResponseInfo<ResponsePictureSize>();
 
             try
             {
@@ -36,9 +37,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponsePictureList GetPicturesList([FromBody] RequestPictureList data)
+        public ResponseInfo<ResponsePictureList> GetPicturesList([FromBody] RequestPictureList data)
         {
-            ResponsePictureList res = new ResponsePictureList();
+            ResponseInfo<ResponsePictureList> res = new ResponseInfo<ResponsePictureList>();
 
             try
             {
@@ -54,9 +55,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseSODetails GetJobDetailsFromJobnoAndSo([FromBody] RequestJobDetailsFromJobnoAndSo data)
+        public ResponseInfo<ResponseSODetails> GetJobDetailsFromJobnoAndSo([FromBody] RequestJobDetailsFromJobnoAndSo data)
         {
-            ResponseSODetails res = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
 
             try
             {
@@ -72,9 +73,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResSurverList GetSurveysList([FromBody] SurverList data)
+        public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
         {
-            ResSurverList res = new ResSurverList();
+            ResponseInfo<ResSurverList> res = new ResponseInfo<ResSurverList>();
 
             try
             {
@@ -90,9 +91,9 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResActivitieList GetActivityList([FromBody] ActivitieList data)
+        public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
         {
-            ResActivitieList res = new ResActivitieList();
+            ResponseInfo<ResActivitieList> res = new ResponseInfo<ResActivitieList>();
 
             try
             {

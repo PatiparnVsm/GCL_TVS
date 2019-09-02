@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.DAL;
+using GCL_TVS_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -29,17 +30,17 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
-        public ResponseUrl GenerateUrl(RequestUrl data)
+        public ResponseInfo<ResponseUrl> GenerateUrl(RequestUrl data)
         {
-            ResponseUrl response = new ResponseUrl();
+            ResponseInfo<ResponseUrl> response = new ResponseInfo<ResponseUrl>();
 
             try
             {
                 var res = SODAL.ValidateSODetails(data);
-                response.responseCode = res.Code;
-                response.responseMSG = res.Msg;
+                response.ResponseCode = res.Code;
+                response.ResponseMsg = res.Msg;
                 //00 = Success,01 = Not found SalesOrders or CustomerCode
-                if (response.responseCode == "00")
+                if (response.ResponseCode == "00")
                 {
                     var reqParams = GenerateReqparams(data);
                     string hashParams = Utility.HashData(Guid.NewGuid().ToString());
@@ -47,7 +48,8 @@ namespace GCL_TVS_API.Process
                     SODAL.InsLogReq(reqParams, hashParams);
 
                     hashParams = HttpUtility.UrlEncode(hashParams);
-                    response.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
+                    response.ResponseData = new ResponseUrl();
+                    response.ResponseData.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
                 }
             }
             catch (Exception ex)
@@ -57,26 +59,23 @@ namespace GCL_TVS_API.Process
 
             return response;
         }
-        public ResponseSODetails GetdataSO(RequestSODetails data)
+        public ResponseInfo<ResponseSODetails> GetdataSO(RequestSODetails data)
         {
-            ResponseSODetails response = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
                 string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
                 if (!string.IsNullOrEmpty(reqParam))
                 {
                     string[] reqParams = reqParam.Split(',');
-                    //string condition = reqParams[1] + " and " + reqParams[2];
-                    response.sODetails = SODAL.GetSODetails(reqParams);
-
-                    response.responseCode = "00";
-                    response.responseMSG = "Success";
+                    response.ResponseData = new ResponseSODetails();
+                    response.ResponseData.sODetails = SODAL.GetSODetails(reqParams);
 
                 }
                 else
                 {
-                    response.responseCode = "99";
-                    response.responseMSG = "tokenId expire or invalid";
+                    response.ResponseCode = "99";
+                    response.ResponseMsg = "tokenId expire or invalid";
                 }
             }
             catch (Exception ex)
@@ -86,15 +85,13 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseSODetails GetdataSOFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        public ResponseInfo<ResponseSODetails> GetdataSOFromCustAndSo(RequestSODetailsFromCustAndSo data)
         {
-            ResponseSODetails response = new ResponseSODetails();
+            ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
-
-                response.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
-                response.responseCode = "00";
-                response.responseMSG = "Success";
+                response.ResponseData = new ResponseSODetails();
+                response.ResponseData.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
 
             }
             catch (Exception ex)

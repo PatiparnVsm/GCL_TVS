@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCL_TVS_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,9 +18,9 @@ namespace GCL_TVS_API
     {
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
         {
-            StatusError result = new StatusError();
-            //result.ResponseCode = "99";
-            //result.ResponseMsg = "system exception!";
+            ResponseInfo<string> result = new ResponseInfo<string>();
+            result.ResponseCode = "99";
+            result.ResponseMsg = "system exception!";
 
             var response = context.Request.CreateResponse(HttpStatusCode.InternalServerError, result);
 
