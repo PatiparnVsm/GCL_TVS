@@ -75,8 +75,8 @@ namespace GCL_TVS_API.Models
         public string IddReturnCYPicCTC { get; set; }
         public string IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public string CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
-        public string ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }
