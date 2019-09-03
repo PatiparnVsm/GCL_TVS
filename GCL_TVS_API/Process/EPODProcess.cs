@@ -25,13 +25,13 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
-        public ResponseInfo<ResponsePictureSize> GetPictureSize(RequestPictureSize data)
+        public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
             ResponseInfo<ResponsePictureSize> response = new ResponseInfo<ResponsePictureSize>();
             try
             {
                 response.ResponseData = new ResponsePictureSize();
-                response.ResponseData.Size = EPODDAL.GetPicturesize(data);
+                response.ResponseData.Size = EPODDAL.GetPicturesize();
 
                 if (string.IsNullOrEmpty(response.ResponseData.Size))
                 {
@@ -93,13 +93,27 @@ namespace GCL_TVS_API.Process
             return res;
         }
 
-        public ResponseInfo<ResponseSODetails> GetdataJobFromCustAndSo(RequestJobDetailsFromJobnoAndSo data)
+        public ResponseInfo<ResponseSODetails> GetJobListFromDriver(RequestJobListFromDriver data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
                 response.ResponseData = new ResponseSODetails();
-                response.ResponseData.sODetails = EPODDAL.GetJobDetailsFromJobnoAndSo(data);
+                response.ResponseData.sODetails = EPODDAL.GetJobListFromDriver(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+        public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
+        {
+            ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
+            try
+            {
+                response.ResponseData = new ResponseSODetails(); 
+                response.ResponseData.sODetails = EPODDAL.GetDetailsFromJobOrderID(data);
             }
             catch (Exception ex)
             {

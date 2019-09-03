@@ -54,13 +54,13 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseInfo<ResponseSODetails> GetSoDetailsFromCustAndSo([FromBody] RequestSODetailsFromCustAndSo data)
+        public ResponseInfo<ResponseSODetails> GetSoListFromCust([FromBody] RequestSODetailsFromCustAndSo data)
         {
             ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
 
             try
             {
-                res = process.GetdataSOFromCustAndSo(data);
+                res = process.GetSoListFromCust(data);
             }
             catch (Exception ex)
             {

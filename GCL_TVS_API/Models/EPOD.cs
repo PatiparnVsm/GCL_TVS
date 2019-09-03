@@ -7,11 +7,13 @@ namespace GCL_TVS_API.Models
 {
     public class EPOD
     {
-        public class RequestJobDetailsFromJobnoAndSo
+        public class RequestDetailsFromJobOrderID
+        {
+            public string JobOrderID { get; set; }
+        }
+        public class RequestJobListFromDriver
         {
             public string UserID { get; set; }
-            public string JobNo { get; set; }
-            public string SoNo { get; set; }
         }
 
         public class SurverList
@@ -21,8 +23,6 @@ namespace GCL_TVS_API.Models
 
         public class ResSurverList
         {
-            public string responseCode { get; set; }
-            public string responseMSG { get; set; }
             public List<SurverListObj> ObjSurverList { get; set; }
         }
 
@@ -42,8 +42,6 @@ namespace GCL_TVS_API.Models
 
         public class ResActivitieList
         {
-            public string responseCode { get; set; }
-            public string responseMSG { get; set; }
             public List<ActivitieListObj> ObjActivitiesList { get; set; }
         }
 

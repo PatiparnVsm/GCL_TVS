@@ -50,8 +50,9 @@ namespace GCL_TVS_API.Process
 
             try
             {
+                var TokenId = util.PostclientGetToken();
                 //Hash Password
-                var hashPassword = util.Postclient(data);
+                var hashPassword = util.PostclientGetHash(data, TokenId.access_token);
 
                 res = tokenDAL.GetUserDetails(data.UserName, hashPassword);
                 if (res.UserID != null)

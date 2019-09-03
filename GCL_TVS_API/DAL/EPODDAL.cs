@@ -12,7 +12,7 @@ namespace GCL_TVS_API.DAL
 {
     public class EPODDAL : BaseConnection
     {
-        public List<SODetails> GetJobDetailsFromJobnoAndSo(RequestJobDetailsFromJobnoAndSo data)
+        public List<SODetails> GetJobListFromDriver(RequestJobListFromDriver data)
         {
             List<SODetails> ResultSet = new List<SODetails>();
             using (IDbConnection connection = GetOpenConnection())
@@ -21,9 +21,36 @@ namespace GCL_TVS_API.DAL
                 {
                     var param = new DynamicParameters();
                     param.Add("@UserID", data.UserID);
-                    param.Add("@JobNo", data.JobNo);
-                    param.Add("@SoNo", data.SoNo);
-                    ResultSet = connection.Query<SODetails>("SP_GetJobDetailsFromJobnoAndSo", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetails>("SP_GetJobListFromDriver", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
+        public List<SODetails> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
+        {
+            
+            List<SODetails> ResultSet = new List<SODetails>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@JobOrderID", data.JobOrderID);
+                    ResultSet = connection.Query<SODetails>("SP_GetDetailsFromJobOrderID", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)
@@ -96,7 +123,7 @@ namespace GCL_TVS_API.DAL
             }
             return ResultSet;
         }
-        public string GetPicturesize(RequestPictureSize data)
+        public string GetPicturesize()
         {
             string result = "";
             using (IDbConnection connection = GetOpenConnection())

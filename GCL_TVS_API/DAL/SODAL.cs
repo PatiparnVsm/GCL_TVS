@@ -146,7 +146,7 @@ namespace GCL_TVS_API.DAL
             }
             return res;
         }
-        public List<SODetails> GetSODetailsFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        public List<SODetails> GetSoListFromCust(RequestSODetailsFromCustAndSo data)
         {
             List<SODetails> ResultSet = new List<SODetails>();
             using (IDbConnection connection = GetOpenConnection())
@@ -156,8 +156,7 @@ namespace GCL_TVS_API.DAL
                     var param = new DynamicParameters();
                     param.Add("@UserType", data.UserType);
                     param.Add("@CustomerCode", data.CustomerCode);
-                    param.Add("@SoNo", data.SoNo);
-                    ResultSet = connection.Query<SODetails>("SP_GetSoDetailsFromCustAndSo", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetails>("SP_GetSoListFromCust", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

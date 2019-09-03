@@ -85,13 +85,13 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseInfo<ResponseSODetails> GetdataSOFromCustAndSo(RequestSODetailsFromCustAndSo data)
+        public ResponseInfo<ResponseSODetails> GetSoListFromCust(RequestSODetailsFromCustAndSo data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
                 response.ResponseData = new ResponseSODetails();
-                response.ResponseData.sODetails = SODAL.GetSODetailsFromCustAndSo(data);
+                response.ResponseData.sODetails = SODAL.GetSoListFromCust(data);
 
             }
             catch (Exception ex)

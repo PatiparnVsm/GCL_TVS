@@ -19,13 +19,13 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseInfo<ResponsePictureSize> GetPictureSize([FromBody] RequestPictureSize data)
+        public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
             ResponseInfo<ResponsePictureSize> res = new ResponseInfo<ResponsePictureSize>();
 
             try
             {
-                res = process.GetPictureSize(data);
+                res = process.GetPictureSize();
             }
             catch (Exception ex)
             {
@@ -55,13 +55,30 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseInfo<ResponseSODetails> GetJobDetailsFromJobnoAndSo([FromBody] RequestJobDetailsFromJobnoAndSo data)
+        public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {
             ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
 
             try
             {
-                res = process.GetdataJobFromCustAndSo(data);
+                res = process.GetJobListFromDriver(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID([FromBody] RequestDetailsFromJobOrderID data)
+        {
+            ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
+
+            try
+            {
+                res = process.GetDetailsFromJobOrderID(data);
             }
             catch (Exception ex)
             {
