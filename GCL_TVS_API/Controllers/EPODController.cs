@@ -53,7 +53,8 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {

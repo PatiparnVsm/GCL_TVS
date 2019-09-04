@@ -93,7 +93,7 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
-
+        
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver(RequestJobListFromDriver data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
@@ -103,7 +103,8 @@ namespace GCL_TVS_API.Process
                 //response.ResponseData.sODetails = EPODDAL.GetJobListFromDriver(data);
                 var c = EPODDAL.GetJobListFromDriver(data);
                 Util h = new Util();
-                //var a = h.ConvertByteArrayToBase64String(c[0]);
+                
+                var a = h.ConvertByteArrayToBase64String(c[0], new SODetails());
 
             }
             catch (Exception ex)
