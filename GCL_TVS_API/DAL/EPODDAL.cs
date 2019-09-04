@@ -40,17 +40,17 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
-        public List<SODetails> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
+        public List<SODetailsDB> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
         {
             
-            List<SODetails> ResultSet = new List<SODetails>();
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
                     var param = new DynamicParameters();
                     param.Add("@JobOrderID", data.JobOrderID);
-                    ResultSet = connection.Query<SODetails>("SP_GetDetailsFromJobOrderID", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetailsDB>("SP_GetDetailsFromJobOrderID", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

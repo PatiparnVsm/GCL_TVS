@@ -95,9 +95,9 @@ namespace GCL_TVS_API.DAL
                 }
             }
         }
-        public List<SODetails> GetSODetails(string[] data)
+        public List<SODetailsDB> GetSODetails(string[] data)
         {
-            List<SODetails> ResultSet = new List<SODetails>();
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
@@ -108,7 +108,7 @@ namespace GCL_TVS_API.DAL
                         var arrData = data[i].Split('=');
                         param.Add("@" + arrData[0], arrData[1]);
                     }
-                    ResultSet = connection.Query<SODetails>("SP_GetJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetailsDB>("SP_GetJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
                     
                 }
                 catch (Exception ex)
@@ -146,9 +146,9 @@ namespace GCL_TVS_API.DAL
             }
             return res;
         }
-        public List<SODetails> GetSoListFromCust(RequestSODetailsFromCustAndSo data)
+        public List<SODetailsDB> GetSoListFromCust(RequestSODetailsFromCustAndSo data)
         {
-            List<SODetails> ResultSet = new List<SODetails>();
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
@@ -156,7 +156,7 @@ namespace GCL_TVS_API.DAL
                     var param = new DynamicParameters();
                     param.Add("@UserType", data.UserType);
                     param.Add("@CustomerCode", data.CustomerCode);
-                    ResultSet = connection.Query<SODetails>("SP_GetSoListFromCust", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetailsDB>("SP_GetSoListFromCust", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

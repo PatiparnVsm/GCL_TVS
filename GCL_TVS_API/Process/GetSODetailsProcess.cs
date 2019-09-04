@@ -31,6 +31,12 @@ namespace GCL_TVS_API.Process
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
 
+        private static HelperUtil _HelperUtil = null;
+        private static HelperUtil HelperUtil
+        {
+            get { return (_HelperUtil == null) ? _HelperUtil = new HelperUtil() : _HelperUtil; }
+        }
+
         public ResponseInfo<ResponseUrl> GenerateUrl(RequestUrl data)
         {
             ResponseInfo<ResponseUrl> response = new ResponseInfo<ResponseUrl>();
@@ -70,7 +76,10 @@ namespace GCL_TVS_API.Process
                 {
                     string[] reqParams = reqParam.Split(',');
                     response.ResponseData = new ResponseSODetails();
-                    response.ResponseData.sODetails = SODAL.GetSODetails(reqParams);
+
+                    var listData = SODAL.GetSODetails(reqParams);
+
+                    response.ResponseData.sODetails = HelperUtil.GenerateSoDetailBase64String(listData);
 
                 }
                 else
@@ -94,9 +103,9 @@ namespace GCL_TVS_API.Process
 
                 response.ResponseData = new ResponseSODetails();
 
-                response.ResponseData.sODetails = SODAL.GetSoListFromCust(data);
-              
+                var listData = SODAL.GetSoListFromCust(data);
 
+                response.ResponseData.sODetails = HelperUtil.GenerateSoDetailBase64String(listData);
             }
             catch (Exception ex)
             {

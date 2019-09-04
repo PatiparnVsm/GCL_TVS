@@ -2,6 +2,7 @@
 using GCL_TVS_API.Helper;
 using GCL_TVS_API.Models;
 using System;
+using System.Collections.Generic;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
 using static GCL_TVS_API.Models.SODetailsService;
@@ -25,6 +26,12 @@ namespace GCL_TVS_API.Process
         {
             get { return (_Utility == null) ? _Utility = new Utility() : _Utility; }
         }
+        private static HelperUtil _HelperUtil = null;
+        private static HelperUtil HelperUtil
+        {
+            get { return (_HelperUtil == null) ? _HelperUtil = new HelperUtil() : _HelperUtil; }
+        }
+
 
         public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
@@ -93,33 +100,34 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
-        
+
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver(RequestJobListFromDriver data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
                 response.ResponseData = new ResponseSODetails();
-                //response.ResponseData.sODetails = EPODDAL.GetJobListFromDriver(data);
-                var c = EPODDAL.GetJobListFromDriver(data);
-                Util h = new Util();
-                
-                var a = h.ConvertByteArrayToBase64String(c[0], new SODetails());
+                var listData = EPODDAL.GetJobListFromDriver(data);
 
+                response.ResponseData.sODetails = HelperUtil.GenerateSoDetailBase64String(listData);
             }
             catch (Exception ex)
+
             {
                 throw ex;
             }
             return response;
         }
+
         public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
-                response.ResponseData = new ResponseSODetails(); 
-                response.ResponseData.sODetails = EPODDAL.GetDetailsFromJobOrderID(data);
+                response.ResponseData = new ResponseSODetails();
+                var listData = EPODDAL.GetDetailsFromJobOrderID(data);
+
+                response.ResponseData.sODetails = HelperUtil.GenerateSoDetailBase64String(listData);
             }
             catch (Exception ex)
             {
