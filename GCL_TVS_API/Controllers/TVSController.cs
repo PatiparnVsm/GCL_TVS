@@ -71,7 +71,9 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        public ResponseInfo<ResponseCustomerInfo> GetCustomerInfo([FromBody] RequestCustomerInfo data)
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<ResponseCustomerInfo> GetCustomer([FromBody] RequestCustomerInfo data)
         {
             ResponseInfo<ResponseCustomerInfo> res = new ResponseInfo<ResponseCustomerInfo>();
 
