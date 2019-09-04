@@ -32,7 +32,7 @@ namespace GCL_TVS_API.Models
         public string customerCode { get; set; }
         public string customerName { get; set; }
         public string soldToCode { get; set; }
-        public string soldToName { get; set; }
+        //public string soldToName { get; set; }
         public string poNo { get; set; }
         public string bookingNo { get; set; }
         public string shippingLine { get; set; }
