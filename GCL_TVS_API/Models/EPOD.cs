@@ -28,8 +28,8 @@ namespace GCL_TVS_API.Models
 
         public class SurverListObj
         {
-            public string TVSurveylD { get; set; }
-            public string SurveylD { get; set; }
+            public string TVSurveyID { get; set; }
+            public string SurveyID { get; set; }
             public string SurveySequence { get; set; }
             public string SurveyName { get; set; }
         }
@@ -37,7 +37,7 @@ namespace GCL_TVS_API.Models
         public class ActivitieList
         {
             public string JobOrderID { get; set; }
-            public string UserlD { get; set; }            
+            public string UserID { get; set; }            
         }
 
         public class ResActivitieList
@@ -47,8 +47,8 @@ namespace GCL_TVS_API.Models
 
         public class ActivitieListObj
         {
-            public string TVActivitylD { get; set; }
-            public string ProcessStatuslD { get; set; }
+            public string TVActivityID { get; set; }
+            public string ProcessStatusID { get; set; }
             public string ProcessStatusSeq { get; set; }
             public string ProcessStatusName { get; set; }
             public string ProcessOn { get; set; }

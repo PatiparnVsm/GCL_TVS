@@ -77,17 +77,17 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"SELECT a.TVSurveylD, 
-                                       a.SurveylD, 
+                    string sql = @"SELECT a.TVSurveyID, 
+                                       a.SurveyID, 
                                        b.SurveySequence, 
                                        b.SurveyName 
                                 FROM   TruckVisualSurveys  AS a, 
                                        MasterSurveys  AS b 
-                                WHERE  a.SurveylD = b.SurveylD 
-                                       AND a.JobOrderlD = @JobOrderlD
+                                WHERE  a.SurveyID = b.SurveyID 
+                                       AND a.JobOrderID = @JobOrderID
                                        AND b.IsActive = 1 
                                         ";
-                    ResultSet = connection.Query<SurverListObj>(sql, new { JobOrderlD = data.JobOrderID}, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SurverListObj>(sql, new { JobOrderID = data.JobOrderID}, commandType: CommandType.Text).ToList();
 
                 }
                 catch (Exception ex)
@@ -105,15 +105,15 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"select a.TVActivitylD, a.ProcessStatuslD, b.ProcessStatusSeq,
+                    string sql = @"select a.TVActivityID, a.ProcessStatusID, b.ProcessStatusSeq,
                                             b.ProcessStatusName, a.ProcessOn
                                    from TruckVisualActivities as a, MasterProcessStatus as b, Users as c
-                                   where a.ProcessStatuslD = b.ProcessStatuslD
-                                            And a.DriverlD = c.DriverlD
-                                            And a.JobOrderlD = @JobOrderlD
-                                            And c.UserlD = @UserlD 
+                                   where a.ProcessStatusID = b.ProcessStatusID
+                                            And a.DriverID = c.DriverID
+                                            And a.JobOrderID = @JobOrderID
+                                            And c.UserID = @UserID 
                                         ";
-                    ResultSet = connection.Query<ActivitieListObj>(sql, new { JobOrderlD = data.JobOrderID, UserlD = data.UserlD }, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<ActivitieListObj>(sql, new { JobOrderID = data.JobOrderID, UserID = data.UserID }, commandType: CommandType.Text).ToList();
 
                 }
                 catch (Exception ex)
