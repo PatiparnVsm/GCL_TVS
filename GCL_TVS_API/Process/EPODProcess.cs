@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.DAL;
+using GCL_TVS_API.Helper;
 using GCL_TVS_API.Models;
 using System;
 using static GCL_TVS_API.Models.EPOD;
@@ -99,7 +100,11 @@ namespace GCL_TVS_API.Process
             try
             {
                 response.ResponseData = new ResponseSODetails();
-                response.ResponseData.sODetails = EPODDAL.GetJobListFromDriver(data);
+                //response.ResponseData.sODetails = EPODDAL.GetJobListFromDriver(data);
+                var c = EPODDAL.GetJobListFromDriver(data);
+                Util h = new Util();
+                //var a = h.ConvertByteArrayToBase64String(c[0]);
+
             }
             catch (Exception ex)
             {

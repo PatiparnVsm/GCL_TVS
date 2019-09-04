@@ -64,12 +64,30 @@ namespace GCL_TVS_API.Controllers
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
 
             return res;
         }
 
-       
+        public ResponseInfo<ResponseCustomerInfo> GetCustomerInfo([FromBody] RequestCustomerInfo data)
+        {
+            ResponseInfo<ResponseCustomerInfo> res = new ResponseInfo<ResponseCustomerInfo>();
+
+            try
+            {
+                res = process.GetCustomerInfo(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+
+
     }
 }

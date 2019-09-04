@@ -12,16 +12,16 @@ namespace GCL_TVS_API.DAL
 {
     public class EPODDAL : BaseConnection
     {
-        public List<SODetails> GetJobListFromDriver(RequestJobListFromDriver data)
+        public List<SODetailsDB> GetJobListFromDriver(RequestJobListFromDriver data)
         {
-            List<SODetails> ResultSet = new List<SODetails>();
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
                     var param = new DynamicParameters();
                     param.Add("@UserID", data.UserID);
-                    ResultSet = connection.Query<SODetails>("SP_GetJobListFromDriver", param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<SODetailsDB>("SP_GetJobListFromDriver", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

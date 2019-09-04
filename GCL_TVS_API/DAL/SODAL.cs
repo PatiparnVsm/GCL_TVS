@@ -175,8 +175,38 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
-      
+
+        public List<CustomerInfo> GetCustomerInfoList(RequestCustomerInfo data)
+        {
+            List<CustomerInfo> ResultSet = new List<CustomerInfo>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@CustomerCode", data.CustomerCode);
+                    ResultSet = connection.Query<CustomerInfo>("SP_GetCustomerInfo", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
         
+
+
 
     }
 }

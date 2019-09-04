@@ -180,8 +180,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="JwtManager.cs" />
     <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\PictureList.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\EPOD.cs" />

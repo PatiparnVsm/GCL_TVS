@@ -1,4 +1,5 @@
 ﻿using GCL_TVS_API.DAL;
+using GCL_TVS_API.Helper;
 using GCL_TVS_API.Models;
 using System;
 using System.Collections.Generic;
@@ -90,8 +91,27 @@ namespace GCL_TVS_API.Process
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try
             {
+
                 response.ResponseData = new ResponseSODetails();
+
                 response.ResponseData.sODetails = SODAL.GetSoListFromCust(data);
+              
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public ResponseInfo<ResponseCustomerInfo> GetCustomerInfo(RequestCustomerInfo data)
+        {
+            ResponseInfo<ResponseCustomerInfo> response = new ResponseInfo<ResponseCustomerInfo>();
+            try
+            {
+                response.ResponseData = new ResponseCustomerInfo();
+                response.ResponseData.ResCustomerInfo = SODAL.GetCustomerInfoList(data);
 
             }
             catch (Exception ex)
