@@ -15,7 +15,7 @@ namespace GCL_TVS_API.Models
 
     public class CustomerInfo
     {
-        public Guid CompanyID { get; set; }
+        public int CompanyID { get; set; }
         public string CompanyCode { get; set; }
         public string CompanyName { get; set; }
         public string Address { get; set; }
