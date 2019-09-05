@@ -4,6 +4,7 @@ using GCL_TVS_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
@@ -123,6 +124,53 @@ namespace GCL_TVS_API.DAL
             }
             return ResultSet;
         }
+        public void PostTruckVisualActivities(ReqPostTruckVisualActivities data)
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @" update TruckVisualActivities
+                                    set ProcessOn = @ProcessOn,
+                                    Latitude = @Latitude,
+                                    Longitude = @Longitude,
+                                    ModifiedBy = @UserID,
+                                    ModifiedOn = getdate()
+                                    where TVActivityID = @TVActivityID
+                                    and ModifiedBy Is null
+                                        ";
+                    connection.ExecuteScalar(sql, new { ProcessOn = data.ProcessOn.ToString("yyyy-MM-dd HH:mm:ss.fff"), Latitude = data.Latitude, Longitude = data.Longitude, UserID = data.UserID, TVActivityID = data.TVActivityID }, commandType: CommandType.Text);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+        public void PostTruckVisualPictures(ReqPostTruckVisualPictures data)
+        {
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @" update TruckVisualPictures
+                                    set PictureImage = @PictureImage,
+                                    ModifiedBy = @UserID, 
+                                    ModifiedOn = getdate()
+                                    Where TVPictureID = @TVPictureID
+                                    and PictureApprovedStatus = 0
+                                        ";
+                    connection.ExecuteScalar(sql, new { PictureImage = Convert.FromBase64String(data.PictureImage), UserID = data.UserID, TVPictureID = data.TVPictureID }, commandType: CommandType.Text);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         public string GetPicturesize()
         {
             string result = "";
@@ -149,9 +197,9 @@ namespace GCL_TVS_API.DAL
             return result;
         }
 
-        public List<PictureList> GetPicturesList(RequestPictureList data)
+        public List<PictureList<byte[]>> GetPicturesList(RequestPictureList data)
         {
-            List<PictureList> ResultSet = new List<PictureList>();
+            List<PictureList<byte[]>> ResultSet = new List<PictureList<byte[]>>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
@@ -162,7 +210,7 @@ namespace GCL_TVS_API.DAL
                                    WHERE a.JobOrderID = @JobOrderID
                                    AND b.IsActive = 1 
                                         ";
-                    ResultSet = connection.Query<PictureList>(sql, new { JobOrderID = data.JobOrderID }).ToList();
+                    ResultSet = connection.Query<PictureList<byte[]>>(sql, new { JobOrderID = data.JobOrderID }).ToList();
 
                 }
                 catch (Exception ex)

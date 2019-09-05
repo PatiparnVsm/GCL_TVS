@@ -20,9 +20,9 @@ namespace GCL_TVS_API.Models
             public string JobOrderID { get; set; }
 
         }
-        public class ResponsePictureList
+        public class ResponsePictureList<T> where T : class
         {
-            public List<PictureList> pictures { get; set; }
+            public List<PictureList<T>> pictures { get; set; }
 
         }
     }

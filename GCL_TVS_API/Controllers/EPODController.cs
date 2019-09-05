@@ -37,13 +37,48 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseInfo<ResponsePictureList> GetPicturesList([FromBody] RequestPictureList data)
+        public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
         {
-            ResponseInfo<ResponsePictureList> res = new ResponseInfo<ResponsePictureList>();
+            ResponseInfo<ResponsePictureList<string>> res = new ResponseInfo<ResponsePictureList<string>>();
 
             try
             {
                 res = process.GetPicturesList(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                res = process.PostTruckVisualActivities(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                res = process.PostTruckVisualPictures(data);
             }
             catch (Exception ex)
             {

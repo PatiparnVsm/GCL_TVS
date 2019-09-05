@@ -54,13 +54,16 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseInfo<ResponsePictureList> GetPicturesList(RequestPictureList data)
+        public ResponseInfo<ResponsePictureList<string>> GetPicturesList(RequestPictureList data)
         {
-            ResponseInfo<ResponsePictureList> response = new ResponseInfo<ResponsePictureList>();
+            ResponseInfo<ResponsePictureList<string>> response = new ResponseInfo<ResponsePictureList<string>>();
+            ResponsePictureList<byte[]> resultDb = new ResponsePictureList<byte[]>();
+
             try
             {
-                response.ResponseData = new ResponsePictureList();
-                response.ResponseData.pictures = EPODDAL.GetPicturesList(data);
+                response.ResponseData = new ResponsePictureList<string>();
+                resultDb.pictures = EPODDAL.GetPicturesList(data);
+                response.ResponseData.pictures = HelperUtil.GeneratePictureListBase64String(resultDb.pictures);
             }
             catch (Exception ex)
             {
@@ -77,6 +80,36 @@ namespace GCL_TVS_API.Process
             {
                 res.ResponseData = new ResSurverList();
                 res.ResponseData.ObjSurverList = EPODDAL.GetSurveyList(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
+        public ResponseInfo<string> PostTruckVisualActivities(ReqPostTruckVisualActivities data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                EPODDAL.PostTruckVisualActivities(data);
+                res.ResponseData = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
+        public ResponseInfo<string> PostTruckVisualPictures(ReqPostTruckVisualPictures data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                EPODDAL.PostTruckVisualPictures(data);
+                res.ResponseData = "Success";
             }
             catch (Exception ex)
             {

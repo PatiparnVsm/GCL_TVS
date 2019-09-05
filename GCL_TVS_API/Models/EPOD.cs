@@ -53,5 +53,19 @@ namespace GCL_TVS_API.Models
             public string ProcessStatusName { get; set; }
             public string ProcessOn { get; set; }
         }
+        public class ReqPostTruckVisualActivities
+        {
+            public string UserID { get; set; }
+            public string TVActivityID { get; set; }
+            public DateTime ProcessOn { get; set; }
+            public decimal Latitude { get; set; }
+            public decimal Longitude { get; set; }
+        }
+        public class ReqPostTruckVisualPictures
+        {
+            public string UserID { get; set; }
+            public string TVPictureID { get; set; }
+            public string PictureImage { get; set; }
+        }
     }
 }
