@@ -56,7 +56,7 @@ namespace GCL_TVS_API.Process
 
                     hashParams = HttpUtility.UrlEncode(hashParams);
                     response.ResponseData = new ResponseUrl();
-                    response.ResponseData.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + "?info=" + hashParams;
+                    response.ResponseData.pageUrl = System.Configuration.ConfigurationManager.AppSettings["MasterURL"].ToString() + hashParams;
                 }
             }
             catch (Exception ex)
