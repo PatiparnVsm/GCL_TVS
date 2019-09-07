@@ -14,6 +14,7 @@ namespace GCL_TVS_API.Models
         public string warehouseCode { get; set; }
         public string doNo { get; set; }
         public string dockNo { get; set; }
+        public string jobType { get; set; }
         public string coLoad { get; set; }
         public string coJob { get; set; }
         public string dsNo { get; set; }
@@ -97,6 +98,7 @@ namespace GCL_TVS_API.Models
         public string warehouseCode { get; set; }
         public string doNo { get; set; }
         public string dockNo { get; set; }
+        public string jobType { get; set; }
         public string coLoad { get; set; }
         public string coJob { get; set; }
         public string dsNo { get; set; }
