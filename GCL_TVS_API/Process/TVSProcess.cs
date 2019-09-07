@@ -159,6 +159,21 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+        public ResponseInfo<string> PostSystemNoti(ReqPostSystemNoti data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                SODAL.PostSystemNoti(data);
+                res.ResponseData = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
 
         private string GenerateReqparams(object data)
         {

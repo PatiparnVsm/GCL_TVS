@@ -109,6 +109,24 @@ namespace GCL_TVS_API.Controllers
         }
         [JwtAuthentication]
         [HttpPost]
+        public ResponseInfo<string> PostSystemNoti([FromBody] ReqPostSystemNoti data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                res = process.PostSystemNoti(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+        [JwtAuthentication]
+        [HttpPost]
         public ResponseInfo<ResponseCustomerInfo> GetCustomer([FromBody] RequestCustomerInfo data)
         {
             ResponseInfo<ResponseCustomerInfo> res = new ResponseInfo<ResponseCustomerInfo>();

@@ -154,6 +154,29 @@ namespace GCL_TVS_API.DAL
                 }
             }
         }
+        public void PostSystemNoti(ReqPostSystemNoti data)
+        {
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"insert into SystemNotification (UserID, MsgTitle, MsgUrl, CreatedBy, CreatedOn)
+                                   values (@UserID, @MsgTitle, @MsgUrl, @SystemName, getdate())
+                                        ";
+                    var param = new DynamicParameters();
+                    param.Add("@UserID", data.UserID);
+                    param.Add("@MsgTitle", data.MsgTitle);
+                    param.Add("@MsgUrl", data.MsgUrl);
+                    param.Add("@SystemName", data.SystemName);
+                    connection.ExecuteScalar(sql, param, commandType: CommandType.Text);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         public List<SODetailsDB> GetSODetails(string[] data)
         {
             List<SODetailsDB> ResultSet = new List<SODetailsDB>();

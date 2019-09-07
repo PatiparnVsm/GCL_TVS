@@ -39,5 +39,12 @@ namespace GCL_TVS_API.Models
         {
             public List<JobStatus> jobStatus { get; set; }
         }
+        public class ReqPostSystemNoti
+        {
+            public string UserID { get; set; }
+            public string MsgTitle { get; set; }
+            public string MsgUrl { get; set; }
+            public string SystemName { get; set; }
+        }
     }
 }
