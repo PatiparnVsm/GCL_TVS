@@ -5,15 +5,16 @@ using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
+using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.Controllers
 {
     public class TVSController : ApiController
     {
-        private static GetSODetailsProcess _process = null;
-        private static GetSODetailsProcess process
+        private static TVSProcess _process = null;
+        private static TVSProcess process
         {
-            get { return (_process == null) ? _process = new GetSODetailsProcess() : _process; }
+            get { return (_process == null) ? _process = new TVSProcess() : _process; }
         }
 
         [JwtAuthentication]
@@ -61,6 +62,24 @@ namespace GCL_TVS_API.Controllers
             try
             {
                 res = process.GetSoListFromCust(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<RspSystemNotiList> GetSystemNotiList([FromBody] ReqSystemNotiList data)
+        {
+            ResponseInfo<RspSystemNotiList> res = new ResponseInfo<RspSystemNotiList>();
+
+            try
+            {
+                res = process.GetSystemNotiList(data);
             }
             catch (Exception ex)
             {

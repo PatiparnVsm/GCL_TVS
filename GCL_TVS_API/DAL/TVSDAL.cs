@@ -7,14 +7,44 @@ using System.Data;
 using System.Linq;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
+using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.DAL
 {
-    public class SODAL : BaseConnection
+    public class TVSDAL : BaseConnection
     {
+        public List<SystemNotiList> GetSystemNotiList(ReqSystemNotiList data)
+        {
+            List<SystemNotiList> ResultSet = new List<SystemNotiList>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"  select SysNotiID, MsgTitle, MsgValue, MsgUrl
+                                     from SystemNotification
+                                     where UserID = @UserID
+                                     and IsReview = 0";
+                    var param = new DynamicParameters();
+                    param.Add("@UserID", data.UserID);
+                    ResultSet = connection.Query<SystemNotiList>(sql, param).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+                return ResultSet;
+            }
+        }
         public bool AuthenCheckTokenExpire(string tokenId)
         {
-            ////
+            
             bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {

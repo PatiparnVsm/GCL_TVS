@@ -7,16 +7,16 @@ using System.Reflection;
 using System.Web;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
-
+using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.Process
 {
-    public class GetSODetailsProcess
+    public class TVSProcess
     {
-        private static SODAL _SODAL = null;
-        private static SODAL SODAL
+        private static TVSDAL _SODAL = null;
+        private static TVSDAL SODAL
         {
-            get { return (_SODAL == null) ? _SODAL = new SODAL() : _SODAL; }
+            get { return (_SODAL == null) ? _SODAL = new TVSDAL() : _SODAL; }
         }
 
         private static AuthenDAL _AuthenDal = null;
@@ -129,7 +129,21 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+        public ResponseInfo<RspSystemNotiList> GetSystemNotiList(ReqSystemNotiList data)
+        {
+            ResponseInfo<RspSystemNotiList> response = new ResponseInfo<RspSystemNotiList>();
+            try
+            {
+                response.ResponseData = new RspSystemNotiList();
+                response.ResponseData.systemNotiList = SODAL.GetSystemNotiList(data);
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
 
 
         private string GenerateReqparams(object data)
