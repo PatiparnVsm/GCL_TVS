@@ -42,6 +42,35 @@ namespace GCL_TVS_API.DAL
                 return ResultSet;
             }
         }
+        public List<JobStatus> GetJobStatus(ReqJobStatus data)
+        {
+            List<JobStatus> ResultSet = new List<JobStatus>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"SELECT B.JobOrderID, B.ProcessStatusID, C.ProcessStatusName, B.ModifiedOn as ProcessStatusDateTime, B.IsCompleted 
+                                   FROM TruckVisualJobOrdersStatus B 
+                                   left join MasterProcessStatus C on B.ProcessStatusID = C.ProcessStatusID
+                                   WHERE B.JobOrderID = @JobOrderID";
+                    var param = new DynamicParameters();
+                    param.Add("@JobOrderID", data.JobOrderID);
+                    ResultSet = connection.Query<JobStatus>(sql, param).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+                return ResultSet;
+            }
+        }
         public bool AuthenCheckTokenExpire(string tokenId)
         {
             

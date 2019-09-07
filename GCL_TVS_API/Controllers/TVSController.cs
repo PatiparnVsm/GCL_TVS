@@ -89,7 +89,24 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseInfo<RspJobStatus> GetJobStatus([FromBody] ReqJobStatus data)
+        {
+            ResponseInfo<RspJobStatus> res = new ResponseInfo<RspJobStatus>();
 
+            try
+            {
+                res = process.GetJobStatus(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
         [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseCustomerInfo> GetCustomer([FromBody] RequestCustomerInfo data)

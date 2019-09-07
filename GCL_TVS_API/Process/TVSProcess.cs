@@ -144,7 +144,21 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+        public ResponseInfo<RspJobStatus> GetJobStatus(ReqJobStatus data)
+        {
+            ResponseInfo<RspJobStatus> response = new ResponseInfo<RspJobStatus>();
+            try
+            {
+                response.ResponseData = new RspJobStatus();
+                response.ResponseData.jobStatus = SODAL.GetJobStatus(data);
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
 
         private string GenerateReqparams(object data)
         {
