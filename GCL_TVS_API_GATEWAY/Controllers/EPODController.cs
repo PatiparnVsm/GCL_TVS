@@ -1,5 +1,6 @@
 ﻿using CIMB.DSE.ML.API.Gateway.Controllers;
 using GCL_TVS_API.Models;
+using GCL_TVS_API_GATEWAY.Filters;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.EPOD;
@@ -10,7 +11,6 @@ namespace GCL_TVS_API.Controllers
 {
     public class EPODController : BaseController
     {
-        ////[JwtAuthentication]
         [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponsePictureSize> GetPictureSize()
@@ -25,129 +25,103 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        ////[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
         {
-            ResponseInfo<ResponsePictureList<string>> res = new ResponseInfo<ResponsePictureList<string>>();
-
             try
             {
-                //res = process.GetPicturesList(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<ResponsePictureList<string>>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
 
-        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
-
             try
             {
-                //res = process.PostTruckVisualActivities(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
-        //[JwtAuthentication]
+        //[AllowAnonymous]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
-
             try
             {
-                //res = process.PostTruckVisualPictures(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
 
-        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {
-            ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
-
             try
             {
-                //res = process.GetJobListFromDriver(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<ResponseSODetails>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
 
-        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID([FromBody] RequestDetailsFromJobOrderID data)
         {
-            ResponseInfo<ResponseSODetails> res = new ResponseInfo<ResponseSODetails>();
-
             try
             {
-                //res = process.GetDetailsFromJobOrderID(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<ResponseSODetails>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return res;
         }
 
-        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
         {
-            ResponseInfo<ResSurverList> res = new ResponseInfo<ResSurverList>();
-
             try
             {
-                //res = process.GetSurverList(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<ResSurverList>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
 
-        //[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
         {
-            ResponseInfo<ResActivitieList> res = new ResponseInfo<ResActivitieList>();
-
             try
             {
-                //res = process.GetActivitieList(data);
+                return base.PostDataToAPINotAuth<ResponseInfo<ResActivitieList>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
     }
 }

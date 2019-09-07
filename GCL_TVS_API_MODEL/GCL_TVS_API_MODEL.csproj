@@ -41,6 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
+    <Compile Include="Models\EPOD.cs" />
+    <Compile Include="Models\ObjT.cs" />
+    <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\PictureList.cs" />
+    <Compile Include="Models\SODetails.cs" />
+    <Compile Include="Models\SODetailsService.cs" />
+    <Compile Include="Models\SODetailsUrl.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\TVS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

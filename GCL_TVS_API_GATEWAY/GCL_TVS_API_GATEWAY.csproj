@@ -213,9 +213,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GCL_TVS_API\GCL_TVS_API.csproj">
-      <Project>{8DDE6CF5-7B0C-47F1-8D36-B03CA68EAB7A}</Project>
-      <Name>GCL_TVS_API</Name>
+    <ProjectReference Include="..\GCL_TVS_API_MODEL\GCL_TVS_API_MODEL.csproj">
+      <Project>{81b4cc48-4a7a-43f4-8a6f-a1f313799d1c}</Project>
+      <Name>GCL_TVS_API_MODEL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

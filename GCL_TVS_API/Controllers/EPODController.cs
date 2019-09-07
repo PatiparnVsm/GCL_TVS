@@ -17,7 +17,7 @@ namespace GCL_TVS_API.Controllers
             get { return (_process == null) ? _process = new EPODProcess() : _process; }
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
@@ -35,7 +35,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
         {
@@ -53,7 +53,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
         {
@@ -70,7 +70,7 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
         {
@@ -88,7 +88,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {
@@ -106,7 +106,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID([FromBody] RequestDetailsFromJobOrderID data)
         {
@@ -124,7 +124,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
         {
@@ -142,7 +142,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
         {
