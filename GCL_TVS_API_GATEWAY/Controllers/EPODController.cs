@@ -1,6 +1,5 @@
-﻿using GCL_TVS_API.Filters;
+﻿using CIMB.DSE.ML.API.Gateway.Controllers;
 using GCL_TVS_API.Models;
-using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.EPOD;
@@ -9,26 +8,24 @@ using static GCL_TVS_API.Models.SODetailsService;
 
 namespace GCL_TVS_API.Controllers
 {
-    public class EPODController : ApiController
+    public class EPODController : BaseController
     {
+        ////[JwtAuthentication]
+        [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
-            ResponseInfo<ResponsePictureSize> res = new ResponseInfo<ResponsePictureSize>();
-
             try
             {
-                //res = process.GetPictureSize();
+                return base.PostDataToAPINotAuth<ResponseInfo<ResponsePictureSize>>(base.apiPathAndQuery, null);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return res;
         }
 
-        [JwtAuthentication]
+        ////[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
         {
@@ -46,7 +43,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
         {
@@ -63,7 +60,7 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
         {
@@ -81,7 +78,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {
@@ -99,7 +96,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID([FromBody] RequestDetailsFromJobOrderID data)
         {
@@ -117,7 +114,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
         {
@@ -135,7 +132,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
         {

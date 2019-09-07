@@ -1,5 +1,4 @@
-﻿using GCL_TVS_API.Filters;
-using GCL_TVS_API.Models;
+﻿using GCL_TVS_API.Models;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.SODetailsService;
@@ -10,7 +9,7 @@ namespace GCL_TVS_API.Controllers
     public class TVSController : ApiController
     {
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseUrl> GetSODetails([FromBody] RequestUrl data)
         {
@@ -46,7 +45,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetSoListFromCust([FromBody] RequestSODetailsFromCustAndSo data)
         {
@@ -65,7 +64,7 @@ namespace GCL_TVS_API.Controllers
             return res;
         }
 
-        [JwtAuthentication]
+        //[JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseCustomerInfo> GetCustomer([FromBody] RequestCustomerInfo data)
         {

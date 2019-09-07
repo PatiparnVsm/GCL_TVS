@@ -1,15 +1,12 @@
-﻿using GCL_TVS_API.Process;
+﻿using CIMB.DSE.ML.API.Gateway.Controllers;
+using GCL_TVS_API_GATEWAY.Process;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using static GCL_TVS_API.Models.Token;
 
 namespace GCL_TVS_API_GATEWAY.Controllers
 {
-    public class AuthenController : ApiController
+    public class AuthenController : BaseController
     {
         private static AuthenProcess _process = null;
         private static AuthenProcess process
@@ -24,15 +21,23 @@ namespace GCL_TVS_API_GATEWAY.Controllers
             dynamic res = null;
 
             try
-            {
-                //res = process.GenerateToken(data);
-                //if (res.access_token == null)
-                //{
-                //    res = new ErrorAuthen();
-                //    res.status = new StatusError();
-                //    res.status.code = "204";
-                //    res.status.message = "SystemID invalid";
-                //}
+            { 
+                var resInternal = base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+                if (resInternal.access_token != null)
+                {
+                    res = process.GenerateToken(data);
+                    if (res.access_token == null)
+                    {
+                        res = new ErrorAuthen();
+                        res.status = new StatusError();
+                        res.status.code = "204";
+                        res.status.message = "SystemID invalid";
+                    }
+                }
+                else
+                {
+                    res = resInternal;
+                }
             }
             catch (Exception ex)
             {
@@ -48,17 +53,24 @@ namespace GCL_TVS_API_GATEWAY.Controllers
         {
             dynamic res = null;
 
-            try
-            {
-                //res = new ResponseTokenByUser();
-                //res = process.GenerateTokenByUser(data);
-                //if (res.access_token == null)
-                //{
-                //    res = new ErrorAuthen();
-                //    res.status = new StatusError();
-                //    res.status.code = "204";
-                //    res.status.message = "Username or Password invalid";
-                //}
+           try
+            { 
+                var resInternal = base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+                if (resInternal.access_token != null)
+                {
+                    res = process.GenerateTokenByUser(resInternal);
+                    if (res.access_token == null)
+                    {
+                        res = new ErrorAuthen();
+                        res.status = new StatusError();
+                        res.status.code = "99";
+                        res.status.message = "System Error!";
+                    }
+                }
+                else
+                {
+                    res = resInternal;
+                }
             }
             catch (Exception ex)
             {

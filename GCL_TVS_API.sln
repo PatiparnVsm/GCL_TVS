@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCL_TVS_API_LOG", "GCL_TVS_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCL_TVS_API_GATEWAY", "GCL_TVS_API_GATEWAY\GCL_TVS_API_GATEWAY.csproj", "{3B7E9E2B-094B-44CD-A3E0-505F983D292A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCL_TVS_API_MODEL", "GCL_TVS_API_MODEL\GCL_TVS_API_MODEL.csproj", "{81B4CC48-4A7A-43F4-8A6F-A1F313799D1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3B7E9E2B-094B-44CD-A3E0-505F983D292A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B7E9E2B-094B-44CD-A3E0-505F983D292A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B7E9E2B-094B-44CD-A3E0-505F983D292A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B4CC48-4A7A-43F4-8A6F-A1F313799D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B4CC48-4A7A-43F4-8A6F-A1F313799D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B4CC48-4A7A-43F4-8A6F-A1F313799D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B4CC48-4A7A-43F4-8A6F-A1F313799D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
