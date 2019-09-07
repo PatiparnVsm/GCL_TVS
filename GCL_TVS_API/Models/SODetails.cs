@@ -80,7 +80,7 @@ namespace GCL_TVS_API.Models
         public DateTime ModifiedOn { get; set; }
         public string ProcessStatusName { get; set; }
         public DateTime ProcessStatusDateTime { get; set; }
-        public Guid DriverID { get; set; }
+        public string DriverID { get; set; }
         public string DriverName { get; set; }
     }
 
@@ -162,7 +162,7 @@ namespace GCL_TVS_API.Models
         public DateTime ModifiedOn { get; set; }
         public string ProcessStatusName { get; set; }
         public DateTime ProcessStatusDateTime { get; set; }
-        public Guid DriverID { get; set; }
+        public string DriverID { get; set; }
         public string DriverName { get; set; }
 
     }
