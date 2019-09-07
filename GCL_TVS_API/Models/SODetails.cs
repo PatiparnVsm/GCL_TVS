@@ -82,6 +82,7 @@ namespace GCL_TVS_API.Models
         public DateTime ProcessStatusDateTime { get; set; }
         public Guid DriverID { get; set; }
         public string DriverName { get; set; }
+        public string IsCompleted { get; set; }
     }
 
     public class SODetailsDB
@@ -164,6 +165,6 @@ namespace GCL_TVS_API.Models
         public DateTime ProcessStatusDateTime { get; set; }
         public Guid DriverID { get; set; }
         public string DriverName { get; set; }
-
+        public string IsCompleted { get; set; }
     }
 }
