@@ -85,7 +85,7 @@ namespace GCL_TVS_API.Process
                 else
                 {
                     response.ResponseCode = "99";
-                    response.ResponseMsg = "tokenId expire or invalid";
+                    response.ResponseMsg = "HashParams expire or invalid";
                 }
             }
             catch (Exception ex)
