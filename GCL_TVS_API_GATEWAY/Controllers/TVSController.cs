@@ -11,7 +11,7 @@ namespace GCL_TVS_API.Controllers
 {
     public class TVSController : BaseController
     {
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseUrl> GetSODetails([FromBody] RequestUrl data)
         {
@@ -24,7 +24,7 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
-
+        
         [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] RequestSODetails data)
@@ -39,7 +39,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetSoListFromCust([FromBody] RequestSODetailsFromCustAndSo data)
         {
@@ -54,6 +54,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<RspSystemNotiList> GetSystemNotiList([FromBody] ReqSystemNotiList data)
         {
@@ -68,7 +69,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<RspJobStatus> GetJobStatus([FromBody] ReqJobStatus data)
         {
@@ -83,7 +84,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<string> PostSystemNoti([FromBody] ReqPostSystemNoti data)
         {
@@ -98,7 +99,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseCustomerInfo> GetCustomer([FromBody] RequestCustomerInfo data)
         {

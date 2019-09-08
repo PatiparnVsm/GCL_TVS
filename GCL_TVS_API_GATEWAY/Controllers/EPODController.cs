@@ -11,7 +11,7 @@ namespace GCL_TVS_API.Controllers
 {
     public class EPODController : BaseController
     {
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponsePictureSize> GetPictureSize()
         {
@@ -25,7 +25,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
         {
@@ -39,7 +39,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
         {
@@ -52,7 +52,8 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
-        //[AllowAnonymous]
+
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
         {
@@ -67,7 +68,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
         {
@@ -81,7 +82,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetDetailsFromJobOrderID([FromBody] RequestDetailsFromJobOrderID data)
         {
@@ -96,7 +97,7 @@ namespace GCL_TVS_API.Controllers
 
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
         {
@@ -110,7 +111,7 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpPost]
         public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
         {
