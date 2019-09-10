@@ -27,6 +27,7 @@
             public string UserID { get; set; }
             public string UserType { get; set; }
             public string FullName { get; set; }
+            public string CustomerCode { get; set; }
         }
 
         public class ErrorAuthen
