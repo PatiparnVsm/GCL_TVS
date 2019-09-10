@@ -160,12 +160,13 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"insert into SystemNotification (UserID, MsgTitle, MsgUrl, CreatedBy, CreatedOn)
-                                   values (@UserID, @MsgTitle, @MsgUrl, @SystemName, getdate())
+                    string sql = @"insert into SystemNotification (UserID, MsgTitle,MsgValue, MsgUrl, CreatedBy, CreatedOn)
+                                   values (@UserID, @MsgTitle, @MsgValue,@MsgUrl, @SystemName, getdate())
                                         ";
                     var param = new DynamicParameters();
                     param.Add("@UserID", data.UserID);
                     param.Add("@MsgTitle", data.MsgTitle);
+                    param.Add("@MsgValue", data.MsgValue);
                     param.Add("@MsgUrl", data.MsgUrl);
                     param.Add("@SystemName", data.SystemName);
                     connection.ExecuteScalar(sql, param, commandType: CommandType.Text);

@@ -43,6 +43,7 @@ namespace GCL_TVS_API.Models
         {
             public string UserID { get; set; }
             public string MsgTitle { get; set; }
+            public string MsgValue { get; set; }
             public string MsgUrl { get; set; }
             public string SystemName { get; set; }
         }
