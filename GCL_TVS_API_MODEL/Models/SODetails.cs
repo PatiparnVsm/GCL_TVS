@@ -23,7 +23,7 @@ namespace GCL_TVS_API.Models
         public string materialDescription { get; set; }
         public string grade { get; set; }
         public string containerSize { get; set; }
-        public string qty { get; set; }
+        public decimal qty { get; set; }
         public string uom { get; set; }
         public string size { get; set; }
         public string tmLoadingDatePlan { get; set; }
@@ -84,6 +84,7 @@ namespace GCL_TVS_API.Models
         public string DriverID { get; set; }
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }
+        public string DoNo { get; set; }
     }
 
     public class SODetailsDB
@@ -147,8 +148,8 @@ namespace GCL_TVS_API.Models
         public string sendContainerInfoStatus { get; set; }
         public string cyDate { get; set; }
         public string cyPlace { get; set; }
-        public byte[] cyPic { get; set; }
-        public byte[] mthCYPicCTC { get; set; }
+        public string cyPic { get; set; }
+        public string mthCYPicCTC { get; set; }
         public string portOfLoadingCode { get; set; }
         public string portOfLoading { get; set; }
         public string portOfDischargeCode { get; set; }
@@ -157,7 +158,7 @@ namespace GCL_TVS_API.Models
         public string returnDateTo { get; set; }
         public string returnPlace { get; set; }
         public string returnPic { get; set; }
-        public byte[] IddReturnCYPicCTC { get; set; }
+        public string IddReturnCYPicCTC { get; set; }
         public string IsActive { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -168,5 +169,6 @@ namespace GCL_TVS_API.Models
         public string DriverID { get; set; }
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }
+        public string DoNo { get; set; }
     }
 }
