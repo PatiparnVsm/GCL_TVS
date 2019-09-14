@@ -175,6 +175,7 @@
     <Compile Include="CustomDelegateHandler\ApiLogHandler.cs" />
     <Compile Include="DAL\BaseConnection.cs" />
     <Compile Include="DAL\EPODDAL.cs" />
+    <Compile Include="DAL\SystemDAL.cs" />
     <Compile Include="DAL\TVSDAL.cs" />
     <Compile Include="DAL\AuthenDAL.cs" />
     <Compile Include="DAL\Utility.cs" />

@@ -27,7 +27,7 @@ namespace GCL_TVS_API.Controllers
         
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] RequestSODetails data)
+        public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] ReqDataByHash data)
         {
             try
             {

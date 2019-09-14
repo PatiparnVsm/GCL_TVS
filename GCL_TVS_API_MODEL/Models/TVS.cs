@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCL_TVS_API_MODEL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,14 @@ namespace GCL_TVS_API.Models
             public String UserID { get; set; }
         }
         public class ReqDoUrl
+        {
+            public String DoNo { get; set; }
+        }
+        public class RspSurveyUrl
+        {
+            public String pageUrl { get; set; }
+        }
+        public class ReqSurveyUrl
         {
             public String DoNo { get; set; }
         }
@@ -31,6 +40,10 @@ namespace GCL_TVS_API.Models
         public class RspSystemNotiList
         {
             public List<SystemNotiList> systemNotiList { get; set; }
+        }
+        public class RspSurveyList
+        {
+            public List<Survey> surveys { get; set; }
         }
 
         public class ReqJobStatus
@@ -56,6 +69,11 @@ namespace GCL_TVS_API.Models
             public string MsgValue { get; set; }
             public string MsgUrl { get; set; }
             public string SystemName { get; set; }
+        }
+        public class ResSPResSP
+        {
+            public string Code { get; set; }
+            public string Msg { get; set; }
         }
     }
 }

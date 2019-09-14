@@ -25,9 +25,77 @@ namespace GCL_TVS_API.Controllers
 
             try
             {
-                res = process.GenerateUrl(data);
+                res = process.GenerateSoUrl(data);
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetDoStatusPage([FromBody] ReqDoUrl data)
+        {
+            dynamic res = null;
+
+            try
+            {
+                res = process.GenerateDoUrl(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex; 
+            }
+
+            return res;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetSurveyPage([FromBody] ReqSurveyUrl data)
+        {
+            dynamic res = null;
+
+            try
+            {
+                res = process.GenerateSurveyUrl(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex; 
+            }
+
+            return res;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetSurveyByHash([FromBody] ReqDataByHash data)
+        {
+            dynamic res = null;
+
+            try
+            {
+                res = process.GetSurveyByHash(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetDoByHash([FromBody] ReqDataByHash data)
+        {
+            dynamic res = null;
+
+            try
+            {
+                res = process.GetDoByHash(data);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -37,7 +105,7 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] RequestSODetails data)
+        public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] ReqDataByHash data)
         {
             ResponseInfo<ResponseSODetails>  res = new ResponseInfo<ResponseSODetails>();
 

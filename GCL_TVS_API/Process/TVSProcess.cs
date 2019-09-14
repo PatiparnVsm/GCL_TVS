@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Web;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
+using static GCL_TVS_API.Models.Token;
 using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.Process
@@ -17,6 +18,11 @@ namespace GCL_TVS_API.Process
         private static TVSDAL SODAL
         {
             get { return (_SODAL == null) ? _SODAL = new TVSDAL() : _SODAL; }
+        }
+        private static SystemDAL _SysDAL = null;
+        private static SystemDAL SysDAL
+        {
+            get { return (_SysDAL == null) ? _SysDAL = new SystemDAL() : _SysDAL; }
         }
 
         private static AuthenDAL _AuthenDal = null;
@@ -37,7 +43,7 @@ namespace GCL_TVS_API.Process
             get { return (_HelperUtil == null) ? _HelperUtil = new HelperUtil() : _HelperUtil; }
         }
 
-        public ResponseInfo<ResponseUrl> GenerateUrl(RequestUrl data)
+        public ResponseInfo<ResponseUrl> GenerateSoUrl(RequestUrl data)
         {
             ResponseInfo<ResponseUrl> response = new ResponseInfo<ResponseUrl>();
 
@@ -66,7 +72,134 @@ namespace GCL_TVS_API.Process
 
             return response;
         }
-        public ResponseInfo<ResponseSODetails> GetdataSO(RequestSODetails data)
+        public dynamic GenerateDoUrl(ReqDoUrl data)
+        {
+            dynamic response = null;
+
+            try
+            {
+                var res = SODAL.ValidateDODetails(data);
+                //00 = Success,01 = Not found SalesOrders or CustomerCode
+                if (res.Code == "00")
+                {
+                    response = new RspDoUrl();
+                    var reqParams = GenerateReqparams(data);
+                    string hashParams = Utility.HashData(Guid.NewGuid().ToString());
+
+                    SODAL.InsLogReq(reqParams, hashParams);
+
+                    hashParams = HttpUtility.UrlEncode(hashParams);
+                    response.pageUrl = SysDAL.GetConfig("1002") + hashParams;
+                }
+                else
+                {
+                    response = new ErrorAuthen();
+                    response.status = new StatusError();
+                    response.status.code = res.Code;
+                    response.status.message = res.Msg;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
+        }
+        public dynamic GenerateSurveyUrl(ReqSurveyUrl data)
+        {
+            dynamic response = null;
+
+            try
+            {
+                var res = SODAL.ValidateSurveyByDoNo(data);
+                //00 = Success,01 = Not found SalesOrders or CustomerCode
+                if (res.Code == "00")
+                {
+                    response = new ReqSurveyUrl();
+                    var reqParams = GenerateReqparams(data);
+                    string hashParams = Utility.HashData(Guid.NewGuid().ToString());
+
+                    SODAL.InsLogReq(reqParams, hashParams);
+
+                    hashParams = HttpUtility.UrlEncode(hashParams);
+                    response.pageUrl = SysDAL.GetConfig("1003") + hashParams;
+                }
+                else
+                {
+                    response = new ErrorAuthen();
+                    response.status = new StatusError();
+                    response.status.code = res.Code;
+                    response.status.message = res.Msg;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
+        }
+        public dynamic GetDoByHash(ReqDataByHash data)
+        {
+            dynamic response = null;
+            try
+            {
+                string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
+                if (!string.IsNullOrEmpty(reqParam))
+                {
+                    string[] reqParams = reqParam.Split(',');
+                    response = new ResponseSODetails();
+
+                    var listData = SODAL.GetDoByHash(reqParams);
+
+                    response.sODetails = HelperUtil.GenerateSoDetailBase64String(listData);
+
+                }
+                else
+                {
+                    response = new ErrorAuthen();
+                    response.status = new StatusError();
+                    response.status.code = "99";
+                    response.status.message = "HashParams expire or invalid";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+        public dynamic GetSurveyByHash(ReqDataByHash data)
+        {
+            dynamic response = null;
+            try
+            {
+                string reqParam = SODAL.AuthenCheckTokenURLExpire(data.hashParams);
+                if (!string.IsNullOrEmpty(reqParam))
+                {
+                    string[] reqParams = reqParam.Split(',');
+                    response = new RspSurveyList();
+                    
+
+                    response.surveys = SODAL.GetSurveyByHash(reqParams);
+
+                }
+                else
+                {
+                    response = new ErrorAuthen();
+                    response.status = new StatusError();
+                    response.status.code = "99";
+                    response.status.message = "HashParams expire or invalid";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+        public ResponseInfo<ResponseSODetails> GetdataSO(ReqDataByHash data)
         {
             ResponseInfo<ResponseSODetails> response = new ResponseInfo<ResponseSODetails>();
             try

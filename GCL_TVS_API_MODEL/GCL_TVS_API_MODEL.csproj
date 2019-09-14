@@ -50,6 +50,7 @@
     <Compile Include="Models\SODetails.cs" />
     <Compile Include="Models\SODetailsService.cs" />
     <Compile Include="Models\SODetailsUrl.cs" />
+    <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TVS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

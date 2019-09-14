@@ -1,6 +1,7 @@
 ﻿using CIMB.DSE.ML.DAL;
 using Dapper;
 using GCL_TVS_API.Models;
+using GCL_TVS_API_MODEL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -210,6 +211,70 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
+        public List<SODetailsDB> GetDoByHash(string[] data)
+        {
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    for (var i = 0; i < data.Length; i++)
+                    {
+                        var arrData = data[i].Split('=');
+                        param.Add("@" + arrData[0], arrData[1]);
+                    }
+                    ResultSet = connection.Query<SODetailsDB>("SP_GetDoJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
+        public List<Survey> GetSurveyByHash(string[] data)
+        {
+            List<Survey> ResultSet = new List<Survey>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    for (var i = 0; i < data.Length; i++)
+                    {
+                        var arrData = data[i].Split('=');
+                        param.Add("@" + arrData[0], arrData[1]);
+                    }
+                    ResultSet = connection.Query<Survey>("SP_GetSurveysListFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
         public SODetailsUrl.ResSP ValidateSODetails(RequestUrl data)
         {
             SODetailsUrl.ResSP res = new SODetailsUrl.ResSP();
@@ -221,6 +286,42 @@ namespace GCL_TVS_API.DAL
                     param.Add("@SONO", data.soNo);
                     param.Add("@CompanyCode", data.customerCode);
                     res = connection.Query<SODetailsUrl.ResSP>("SP_CheckSONO", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
+        public ResSP ValidateDODetails(ReqDoUrl data)
+        {
+            ResSP res = new ResSP();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@DONO", data.DoNo);
+                    res = connection.Query<ResSP>("SP_CheckDONO", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
+        public ResSP ValidateSurveyByDoNo(ReqSurveyUrl data)
+        {
+            ResSP res = new ResSP();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@DONO", data.DoNo);
+                    res = connection.Query<ResSP>("SP_CheckSurveyByDoNo", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {

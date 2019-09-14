@@ -7,7 +7,7 @@ namespace GCL_TVS_API.Models
 {
     public class SODetailsService
     {
-        public class RequestSODetails
+        public class ReqDataByHash
         {
             public string hashParams { get; set; }
         }
