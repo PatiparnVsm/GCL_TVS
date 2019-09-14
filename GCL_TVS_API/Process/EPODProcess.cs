@@ -169,13 +169,13 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseInfo<string> PostTruckVisualServeys(PostTruckVisualServeysObj data)
+        public ResponseInfo<string> PostTruckVisualSurveys(PostTruckVisualServeysObj data)
         {
             ResponseInfo<string> res = new ResponseInfo<string>();
 
             try
             {
-                EPODDAL.UpateTruckVisualPictures(data);
+                EPODDAL.UpdateTruckVisualSurveys(data);
                 res.ResponseData = "Success";
             }
             catch (Exception ex)

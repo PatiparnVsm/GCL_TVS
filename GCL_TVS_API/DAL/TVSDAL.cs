@@ -269,7 +269,7 @@ namespace GCL_TVS_API.DAL
                                    SET  [IsReview] = 1
                                    WHERE [SysNotiID] = @SysNotiID
                                         ";
-                    result = connection.ExecuteScalar<bool>(sql, new { SysNotiID = data.SysNotiID}, commandType: CommandType.Text);
+                    result = connection.ExecuteScalar<bool>(sql, new { SysNotiID = data.SysNotiID }, commandType: CommandType.Text);
 
                 }
                 catch (Exception ex)
@@ -307,9 +307,53 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
+        public bool PostDOSOMapping(DOSOMappingObj data)
+        {
+            bool result = false;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                var transaction = connection.BeginTransaction();
+                try
+                {
+                    string sql = @"INSERT INTO DOSO_Mapping 
+                                                (TransTypeCode, 
+                                                DoNo, 
+                                                SoNo,
+                                                TruckNo,
+                                                ContainerNo,
+                                                CreatedBy,
+                                                CreatedOn)
+                                    VALUES 
+                                                (@TransTypeCode,
+                                                @DoNo,
+                                                @SoNo,
+                                                @TruckNo,
+                                                @ContainerNo,
+                                                'eDO System',
+                                                getdate()
+                                                )";
+                    var resultInsert = connection.Execute(sql, data, transaction, null, CommandType.Text);
+                    if (resultInsert > 0)
+                    {
+                        result = true;
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
 
-
-
-
+                return result;
+            }
+        }
     }
 }

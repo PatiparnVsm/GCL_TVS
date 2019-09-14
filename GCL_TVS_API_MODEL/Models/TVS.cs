@@ -59,5 +59,13 @@ namespace GCL_TVS_API.Models
         {
             public Guid? SysNotiID { get; set; }
         }
+        public class DOSOMappingObj
+        {
+            public string TransTypeCode { get; set; }
+            public string DoNo { get; set; }
+            public string SoNO { get; set; }
+            public string TruckNo { get; set; }
+            public string ContainerNo { get; set; }
+        }
     }
 }

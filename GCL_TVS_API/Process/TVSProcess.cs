@@ -189,7 +189,24 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
+        public ResponseInfo<string> PostDOSOMapping(DOSOMappingObj data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
 
+            try
+            {
+                var result = SODAL.PostDOSOMapping(data);
+                if (result)
+                {
+                    res.ResponseData = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
         private string GenerateReqparams(object data)
         {
             string reqParam = string.Empty;

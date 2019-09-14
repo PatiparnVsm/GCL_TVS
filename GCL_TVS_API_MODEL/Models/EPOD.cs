@@ -72,8 +72,8 @@ namespace GCL_TVS_API.Models
         public class PostTruckVisualServeysObj
         {
             public string UserID { get; set; }
-            public string TVSurverID { get; set; }
-            public int SurverResult { get; set; }
+            public string TVSurveyID { get; set; }
+            public int SurveyResult { get; set; }
         }
     }
 }
