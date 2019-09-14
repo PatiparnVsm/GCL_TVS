@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GCL_TVS_API.Models
 {
@@ -48,6 +46,10 @@ namespace GCL_TVS_API.Models
             public string MsgValue { get; set; }
             public string MsgUrl { get; set; }
             public string SystemName { get; set; }
+        }
+        public class NotiReviewObj
+        {
+            public Guid? SysNotiID { get; set; }
         }
     }
 }

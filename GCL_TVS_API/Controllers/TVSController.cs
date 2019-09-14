@@ -143,7 +143,43 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public ResponseInfo<string> PostSystemNotiReview([FromBody] NotiReviewObj data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
 
+            try
+            {
+                res = process.PostSystemNotiReview(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ResponseInfo<string> PostSystemNotiReview([FromBody] NotiReviewObj data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                res = process.PostSystemNotiReview(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
 
     }
 }

@@ -174,6 +174,21 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
+        public ResponseInfo<string> PostSystemNotiReview(NotiReviewObj data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                SODAL.PostSystemNotiReview(data);
+                res.ResponseData = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
 
         private string GenerateReqparams(object data)
         {

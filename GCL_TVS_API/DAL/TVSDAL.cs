@@ -258,7 +258,27 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
+        public bool PostSystemNotiReview(NotiReviewObj data)
+        {
+            bool result;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"UPDATE [SystemNotification] 
+                                   SET  [IsReview] = 1
+                                   WHERE [SysNotiID] = @SysNotiID
+                                        ";
+                    result = connection.ExecuteScalar<bool>(sql, new { SysNotiID = data.SysNotiID}, commandType: CommandType.Text);
 
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return result;
+        }
         public List<CustomerInfo> GetCustomerInfoList(RequestCustomerInfo data)
         {
             List<CustomerInfo> ResultSet = new List<CustomerInfo>();
