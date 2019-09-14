@@ -112,5 +112,57 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
+        [JwtAuthentication]
+        [HttpPost]
+        public dynamic GetDoStatusPage([FromBody] ReqDoUrl data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [JwtAuthentication]
+        [HttpPost]
+        public dynamic GetSurveyPage([FromBody] ReqSurveyUrl data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetSurveyByHash([FromBody] ReqDataByHash data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public dynamic GetDoByHash([FromBody] ReqDataByHash data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<dynamic>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

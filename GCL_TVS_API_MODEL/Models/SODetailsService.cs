@@ -20,6 +20,8 @@ namespace GCL_TVS_API.Models
         {
             public string UserType { get; set; }
             public string CustomerCode { get; set; }
+            public string LoadingPlanFrom { get; set; }
+            public string LoadingPlanTo { get; set; }
         }
 
         

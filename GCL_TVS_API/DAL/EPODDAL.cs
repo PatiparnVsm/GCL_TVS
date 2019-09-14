@@ -81,7 +81,8 @@ namespace GCL_TVS_API.DAL
                     string sql = @"SELECT a.TVSurveyID, 
                                        a.SurveyID, 
                                        b.SurveySequence, 
-                                       b.SurveyName 
+                                       b.SurveyName ,
+                                       a.SurveyResult
                                 FROM   TruckVisualSurveys  AS a, 
                                        MasterSurveys  AS b 
                                 WHERE  a.SurveyID = b.SurveyID 

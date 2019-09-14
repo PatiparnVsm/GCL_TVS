@@ -340,6 +340,8 @@ namespace GCL_TVS_API.DAL
                     var param = new DynamicParameters();
                     param.Add("@UserType", data.UserType);
                     param.Add("@CustomerCode", data.CustomerCode);
+                    param.Add("@LoadingPlanFrom", data.LoadingPlanFrom);
+                    param.Add("@LoadingPlanTo", data.LoadingPlanTo);
                     ResultSet = connection.Query<SODetailsDB>("SP_GetSoListFromCust", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }

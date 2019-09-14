@@ -31,6 +31,7 @@ namespace GCL_TVS_API.Models
             public string SurveyID { get; set; }
             public string SurveySequence { get; set; }
             public string SurveyName { get; set; }
+            public Int32 SurveyResult { get; set; }
         }
 
         public class ActivitieList
