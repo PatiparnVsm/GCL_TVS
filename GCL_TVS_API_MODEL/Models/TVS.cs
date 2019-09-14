@@ -9,6 +9,14 @@ namespace GCL_TVS_API.Models
         {
             public String UserID { get; set; }
         }
+        public class ReqDoUrl
+        {
+            public String DoNo { get; set; }
+        }
+        public class RspDoUrl
+        {
+            public String pageUrl { get; set; }
+        }
         public class SystemNotiList
         {
             public Guid? SysNotiID { get; set; }
