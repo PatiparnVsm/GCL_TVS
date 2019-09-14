@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GCL_TVS_API.Models
 {
@@ -11,6 +9,7 @@ namespace GCL_TVS_API.Models
         {
             public string JobOrderID { get; set; }
         }
+
         public class RequestJobListFromDriver
         {
             public string UserID { get; set; }
@@ -37,7 +36,7 @@ namespace GCL_TVS_API.Models
         public class ActivitieList
         {
             public string JobOrderID { get; set; }
-            public string UserID { get; set; }            
+            public string UserID { get; set; }
         }
 
         public class ResActivitieList
@@ -53,6 +52,7 @@ namespace GCL_TVS_API.Models
             public string ProcessStatusName { get; set; }
             public string ProcessOn { get; set; }
         }
+
         public class ReqPostTruckVisualActivities
         {
             public string UserID { get; set; }
@@ -61,11 +61,19 @@ namespace GCL_TVS_API.Models
             public decimal Latitude { get; set; }
             public decimal Longitude { get; set; }
         }
+
         public class ReqPostTruckVisualPictures
         {
             public string UserID { get; set; }
             public string TVPictureID { get; set; }
             public string PictureImage { get; set; }
+        }
+
+        public class PostTruckVisualServeysObj
+        {
+            public string UserID { get; set; }
+            public string TVSurverID { get; set; }
+            public int SurverResult { get; set; }
         }
     }
 }
