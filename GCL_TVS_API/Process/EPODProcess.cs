@@ -168,5 +168,21 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+
+        public ResponseInfo<string> PostTruckVisualServeys(PostTruckVisualServeysObj data)
+        {
+            ResponseInfo<string> res = new ResponseInfo<string>();
+
+            try
+            {
+                EPODDAL.UpateTruckVisualPictures(data);
+                res.ResponseData = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
     }
 }

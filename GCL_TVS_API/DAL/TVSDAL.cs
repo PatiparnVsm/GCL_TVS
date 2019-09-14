@@ -20,7 +20,7 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"  select SysNotiID, MsgTitle, MsgValue, MsgUrl,IsReview
+                    string sql = @"  select SysNotiID, MsgTitle, MsgValue, MsgUrl, IsReview, CreatedOn
                                      from SystemNotification
                                      where UserID = @UserID
                                     ";

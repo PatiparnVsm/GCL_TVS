@@ -230,5 +230,28 @@ namespace GCL_TVS_API.DAL
             }
             return ResultSet;
         }
+
+        public bool UpateTruckVisualPictures(PostTruckVisualServeysObj data)
+        {
+            bool result;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"UPDATE TruckVisualPictures 
+                                   SET  SurverResult = @SurverResult,
+                                        ModifiedBy = @UserID,
+                                        ModifiedOn = getdate(),
+                                   WHERE TVSurverID = @TVSurverID
+                                        ";
+                    result = connection.ExecuteScalar<bool>(sql, new { SurverResult = data.SurverResult, UserID = data.UserID, TVSurverID = data.TVSurverID }, commandType: CommandType.Text);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return result;
+        }
     }
 }
