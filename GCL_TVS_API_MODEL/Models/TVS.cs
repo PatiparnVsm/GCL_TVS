@@ -17,6 +17,8 @@ namespace GCL_TVS_API.Models
             public String MsgTitle { get; set; }
             public String MsgValue { get; set; }
             public String MsgUrl { get; set; }
+            public String IsReview { get; set; }
+            public DateTime? CreatedOn { get; set; }
         }
         public class RspSystemNotiList
         {
