@@ -4,7 +4,7 @@ namespace GCL_TVS_API.Models
 {
     public class SODetails
     {
-        public Guid JobOrderID { get; set; }
+        public Guid? JobOrderID { get; set; }
         public string hashValueWH { get; set; }
         public string hashValueDock { get; set; }
         public string jobNo { get; set; }
@@ -76,11 +76,11 @@ namespace GCL_TVS_API.Models
         public string IddReturnCYPicCTC { get; set; }
         public string IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
         public string ProcessStatusName { get; set; }
-        public DateTime ProcessStatusDateTime { get; set; }
+        public DateTime? ProcessStatusDateTime { get; set; }
         public string DriverID { get; set; }
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }
@@ -88,7 +88,7 @@ namespace GCL_TVS_API.Models
 
     public class SODetailsDB
     {
-        public Guid JobOrderID { get; set; }
+        public Guid? JobOrderID { get; set; }
         public string hashValueWH { get; set; }
         public string hashValueDock { get; set; }
         public string jobNo { get; set; }
@@ -110,7 +110,7 @@ namespace GCL_TVS_API.Models
         public string qty { get; set; }
         public string uom { get; set; }
         public string size { get; set; }
-        public string tmLoadingDatePlan { get; set; }
+        public DateTime? tmLoadingDatePlan { get; set; }
         public string tmArrivalTimePlan { get; set; }
         public string agentCode { get; set; }
         public string agentName { get; set; }
@@ -160,11 +160,11 @@ namespace GCL_TVS_API.Models
         public byte[] IddReturnCYPicCTC { get; set; }
         public string IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
         public string ProcessStatusName { get; set; }
-        public DateTime ProcessStatusDateTime { get; set; }
+        public DateTime? ProcessStatusDateTime { get; set; }
         public string DriverID { get; set; }
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }

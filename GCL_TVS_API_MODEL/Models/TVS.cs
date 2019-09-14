@@ -13,7 +13,7 @@ namespace GCL_TVS_API.Models
         }
         public class SystemNotiList
         {
-            public Guid SysNotiID { get; set; }
+            public Guid? SysNotiID { get; set; }
             public String MsgTitle { get; set; }
             public String MsgValue { get; set; }
             public String MsgUrl { get; set; }
@@ -29,10 +29,10 @@ namespace GCL_TVS_API.Models
         }
         public class JobStatus
         {
-            public Guid JobOrderID { get; set; }
+            public Guid? JobOrderID { get; set; }
             public Int32 ProcessStatusID { get; set; }
             public String ProcessStatusName { get; set; }
-            public DateTime ProcessStatusDateTime { get; set; }
+            public DateTime? ProcessStatusDateTime { get; set; }
             public Boolean IsCompleted { get; set; }
         }
         public class RspJobStatus

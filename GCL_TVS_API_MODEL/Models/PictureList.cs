@@ -8,7 +8,7 @@ namespace GCL_TVS_API.Models
     public class PictureList<T> where T : class
 
     {
-        public Guid TVPictureID { get; set; }
+        public Guid? TVPictureID { get; set; }
         public int PictureID { get; set; }
         public int PictureSequence { get; set; }
         public string PictureName { get; set; }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace GCL_TVS_API.Helper
 {
@@ -27,6 +26,15 @@ namespace GCL_TVS_API.Helper
                             v = Convert.ToBase64String(byteValue);
                         }
                     }
+                    if (Name.ToLower() == "tmloadingdateplan")
+                    {
+                        var dtValue = ((DateTime?)propertyInfo.GetValue(obj, null));
+                        if (dtValue.HasValue)
+                        {
+                            v = dtValue.Value.ToString("yyyy-MM-dd");
+                        }
+                    }
+
 
                     objOutput.GetType().GetProperty(Name).SetValue(objOutput, v);
                 }

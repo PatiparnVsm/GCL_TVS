@@ -35,9 +35,9 @@ namespace GCL_TVS_API.Models
         public string CompanyTypeCode { get; set; }
         public string IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
         public string SubDistrictName { get; set; }
         public string DistrictName { get; set; }
         public string ProvinceName { get; set; }

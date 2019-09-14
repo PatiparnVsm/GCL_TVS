@@ -57,7 +57,7 @@ namespace GCL_TVS_API.Models
         {
             public string UserID { get; set; }
             public string TVActivityID { get; set; }
-            public DateTime ProcessOn { get; set; }
+            public DateTime? ProcessOn { get; set; }
             public decimal Latitude { get; set; }
             public decimal Longitude { get; set; }
         }

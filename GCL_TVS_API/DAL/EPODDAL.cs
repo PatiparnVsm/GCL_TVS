@@ -43,7 +43,7 @@ namespace GCL_TVS_API.DAL
         }
         public List<SODetailsDB> GetDetailsFromJobOrderID(RequestDetailsFromJobOrderID data)
         {
-            
+
             List<SODetailsDB> ResultSet = new List<SODetailsDB>();
             using (IDbConnection connection = GetOpenConnection())
             {
@@ -88,7 +88,7 @@ namespace GCL_TVS_API.DAL
                                        AND a.JobOrderID = @JobOrderID
                                        AND b.IsActive = 1 
                                         ";
-                    ResultSet = connection.Query<SurverListObj>(sql, new { JobOrderID = data.JobOrderID}, commandType: CommandType.Text).ToList();
+                    ResultSet = connection.Query<SurverListObj>(sql, new { JobOrderID = data.JobOrderID }, commandType: CommandType.Text).ToList();
 
                 }
                 catch (Exception ex)
@@ -140,7 +140,17 @@ namespace GCL_TVS_API.DAL
                                     where TVActivityID = @TVActivityID
                                     and ModifiedBy Is null
                                         ";
-                    connection.ExecuteScalar(sql, new { ProcessOn = data.ProcessOn.ToString("yyyy-MM-dd HH:mm:ss.fff"), Latitude = data.Latitude, Longitude = data.Longitude, UserID = data.UserID, TVActivityID = data.TVActivityID }, commandType: CommandType.Text);
+                    var ProcessOn = string.Empty;
+                    if (data.ProcessOn.HasValue)
+                    {
+                        ProcessOn = data.ProcessOn.Value.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    }
+                    else
+                    {
+                        ProcessOn = null;
+                    }
+
+                    connection.ExecuteScalar(sql, new { ProcessOn = ProcessOn, Latitude = data.Latitude, Longitude = data.Longitude, UserID = data.UserID, TVActivityID = data.TVActivityID }, commandType: CommandType.Text);
 
                 }
                 catch (Exception ex)

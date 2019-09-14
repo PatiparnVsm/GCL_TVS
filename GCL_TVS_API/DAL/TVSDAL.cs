@@ -20,10 +20,10 @@ namespace GCL_TVS_API.DAL
             {
                 try
                 {
-                    string sql = @"  select SysNotiID, MsgTitle, MsgValue, MsgUrl
+                    string sql = @"  select SysNotiID, MsgTitle, MsgValue, MsgUrl,IsReview
                                      from SystemNotification
                                      where UserID = @UserID
-                                     and IsReview = 0";
+                                    ";
                     var param = new DynamicParameters();
                     param.Add("@UserID", data.UserID);
                     ResultSet = connection.Query<SystemNotiList>(sql, param).ToList();
@@ -73,7 +73,7 @@ namespace GCL_TVS_API.DAL
         }
         public bool AuthenCheckTokenExpire(string tokenId)
         {
-            
+
             bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {
@@ -129,7 +129,7 @@ namespace GCL_TVS_API.DAL
             }
             return result;
         }
-        public void InsLogReq( string reqParams, string hashParams)
+        public void InsLogReq(string reqParams, string hashParams)
         {
             using (IDbConnection connection = GetOpenConnection())
             {
@@ -192,7 +192,7 @@ namespace GCL_TVS_API.DAL
                         param.Add("@" + arrData[0], arrData[1]);
                     }
                     ResultSet = connection.Query<SODetailsDB>("SP_GetJobOrderFromUrl", param, commandType: CommandType.StoredProcedure).ToList();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -287,7 +287,7 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
-        
+
 
 
 
