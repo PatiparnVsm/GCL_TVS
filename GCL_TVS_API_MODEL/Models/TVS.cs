@@ -1,8 +1,6 @@
 ﻿using GCL_TVS_API_MODEL.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GCL_TVS_API.Models
 {
@@ -74,6 +72,18 @@ namespace GCL_TVS_API.Models
         {
             public string Code { get; set; }
             public string Msg { get; set; }
+        }
+        public class NotiReviewObj
+        {
+            public Guid? SysNotiID { get; set; }
+        }
+        public class DOSOMappingObj
+        {
+            public string TransTypeCode { get; set; }
+            public string DoNo { get; set; }
+            public string SoNO { get; set; }
+            public string TruckNo { get; set; }
+            public string ContainerNo { get; set; }
         }
     }
 }

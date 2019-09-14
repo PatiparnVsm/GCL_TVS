@@ -162,13 +162,13 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<ResActivitieList> PostTruckVisualServeys([FromBody] ActivitieList data)
+        public ResponseInfo<string> PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
         {
-            ResponseInfo<ResActivitieList> res = new ResponseInfo<ResActivitieList>();
+            ResponseInfo<string> res = new ResponseInfo<string>();
 
             try
             {
-                res = process.GetActivitieList(data);
+                res = process.PostTruckVisualSurveys(data);
             }
             catch (Exception ex)
             {
