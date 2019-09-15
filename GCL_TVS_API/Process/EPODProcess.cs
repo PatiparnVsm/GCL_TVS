@@ -169,14 +169,23 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseInfo<string> PostTruckVisualSurveys(PostTruckVisualServeysObj data)
+        public ResponseStatus PostTruckVisualSurveys(PostTruckVisualServeysObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
+            ResponseStatus res = new ResponseStatus();
 
             try
             {
-                EPODDAL.UpdateTruckVisualSurveys(data);
-                res.ResponseData = "Success";
+                var result = EPODDAL.UpdateTruckVisualSurveys(data);
+                if (result)
+                {
+                    res.status = new Status();
+                }
+                else
+                {
+                    res.status = new Status();
+                    res.status.code = "01";
+                    res.status.message = "can't update data";
+                }
             }
             catch (Exception ex)
             {

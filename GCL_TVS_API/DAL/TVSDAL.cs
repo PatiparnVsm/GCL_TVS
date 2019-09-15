@@ -363,7 +363,7 @@ namespace GCL_TVS_API.DAL
         }
         public bool PostSystemNotiReview(NotiReviewObj data)
         {
-            bool result;
+            bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
@@ -372,8 +372,11 @@ namespace GCL_TVS_API.DAL
                                    SET  [IsReview] = 1
                                    WHERE [SysNotiID] = @SysNotiID
                                         ";
-                    result = connection.ExecuteScalar<bool>(sql, new { SysNotiID = data.SysNotiID }, commandType: CommandType.Text);
-
+                    var resultUpdate = connection.Execute(sql, new { SysNotiID = data.SysNotiID }, commandType: CommandType.Text);
+                    if(resultUpdate > 0)
+                    {
+                        result = true;
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -307,14 +307,23 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
-        public ResponseInfo<string> PostSystemNotiReview(NotiReviewObj data)
+        public ResponseStatus PostSystemNotiReview(NotiReviewObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
+            ResponseStatus res = new ResponseStatus();
 
             try
             {
-                SODAL.PostSystemNotiReview(data);
-                res.ResponseData = "Success";
+                var result = SODAL.PostSystemNotiReview(data);
+                if (result)
+                {
+                    res.status = new Status();
+                }
+                else
+                {
+                    res.status = new Status();
+                    res.status.code = "01";
+                    res.status.message = "can't update data";
+                }
             }
             catch (Exception ex)
             {
@@ -322,16 +331,22 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
-        public ResponseInfo<string> PostDOSOMapping(DOSOMappingObj data)
+        public ResponseStatus PostDOSOMapping(DOSOMappingObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
-
+            //dynamic res = null;
+            dynamic res = new ResponseStatus();
             try
             {
                 var result = SODAL.PostDOSOMapping(data);
                 if (result)
+                {                    
+                    res.status = new Status();
+                }
+                else
                 {
-                    res.ResponseData = "Success";
+                    res.status = new Status();
+                    res.status.code = "01";
+                    res.status.message = "can't insert data";
                 }
             }
             catch (Exception ex)

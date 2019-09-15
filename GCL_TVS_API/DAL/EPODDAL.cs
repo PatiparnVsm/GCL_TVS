@@ -234,7 +234,7 @@ namespace GCL_TVS_API.DAL
 
         public bool UpdateTruckVisualSurveys(PostTruckVisualServeysObj data)
         {
-            bool result;
+            bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
@@ -245,7 +245,11 @@ namespace GCL_TVS_API.DAL
                                         ModifiedOn = getdate()
                                    WHERE TVSurveyID = @TVSurveyID
                                         ";
-                    result = connection.ExecuteScalar<bool>(sql, new { SurveyResult = data.SurveyResult, UserID = data.UserID, TVSurveyID = data.TVSurveyID }, commandType: CommandType.Text);
+                    var resultUpdate = connection.Execute(sql, new { SurveyResult = data.SurveyResult, UserID = data.UserID, TVSurveyID = data.TVSurveyID }, commandType: CommandType.Text);
+                    if (resultUpdate > 0)
+                    {
+                        result = true;
+                    }
                 }
                 catch (Exception ex)
                 {

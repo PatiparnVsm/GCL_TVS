@@ -162,9 +162,9 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<string> PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
+        public ResponseStatus PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
+            ResponseStatus res = new ResponseStatus();
 
             try
             {

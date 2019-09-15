@@ -124,5 +124,19 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
+
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseStatus PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<ResponseStatus>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -213,9 +213,9 @@ namespace GCL_TVS_API.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<string> PostSystemNotiReview([FromBody] NotiReviewObj data)
+        public ResponseStatus PostSystemNotiReview([FromBody] NotiReviewObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
+            ResponseStatus res = new ResponseStatus();
 
             try
             {
@@ -231,9 +231,9 @@ namespace GCL_TVS_API.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<string> PostDOSOMapping([FromBody] DOSOMappingObj data)
+        public ResponseStatus PostDOSOMapping([FromBody] DOSOMappingObj data)
         {
-            ResponseInfo<string> res = new ResponseInfo<string>();
+            ResponseStatus res = new ResponseStatus();
 
             try
             {

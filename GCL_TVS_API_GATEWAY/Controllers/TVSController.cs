@@ -164,5 +164,32 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
+
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseStatus PostSystemNotiReview([FromBody] NotiReviewObj data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<ResponseStatus>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseStatus PostDOSOMapping([FromBody] DOSOMappingObj data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<ResponseStatus>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
