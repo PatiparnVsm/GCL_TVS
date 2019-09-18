@@ -421,7 +421,7 @@ namespace GCL_TVS_API.DAL
                 var transaction = connection.BeginTransaction();
                 try
                 {
-                    string sql = @"INSERT INTO DOSO_Mapping 
+                    string sql = @"INSERT INTO TempFromEDO 
                                                 (TransTypeCode, 
                                                 DoNo, 
                                                 SoNo,
