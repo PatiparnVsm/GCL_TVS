@@ -108,7 +108,7 @@ namespace GCL_TVS_API.Models
         public string materialDescription { get; set; }
         public string grade { get; set; }
         public string containerSize { get; set; }
-        public string qty { get; set; }
+        public decimal qty { get; set; }
         public string uom { get; set; }
         public string size { get; set; }
         public DateTime? tmLoadingDatePlan { get; set; }
