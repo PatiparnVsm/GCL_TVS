@@ -54,8 +54,8 @@ namespace GCL_TVS_API.Models
         public string vehicleLicenseHead { get; set; }
         public string vehicleLicenseTailCode { get; set; }
         public string vehicleLicenseTail { get; set; }
-        public string closingTime { get; set; }
-        public string deliveryPlanDate { get; set; }
+        public DateTime? closingTime { get; set; }
+        public DateTime? deliveryPlanDate { get; set; }
         public string shipToCode { get; set; }
         public string shipToName { get; set; }
         public string shipToAddress { get; set; }
@@ -139,8 +139,8 @@ namespace GCL_TVS_API.Models
         public string vehicleLicenseHead { get; set; }
         public string vehicleLicenseTailCode { get; set; }
         public string vehicleLicenseTail { get; set; }
-        public string closingTime { get; set; }
-        public string deliveryPlanDate { get; set; }
+        public DateTime? closingTime { get; set; }
+        public DateTime? deliveryPlanDate { get; set; }
         public string shipToCode { get; set; }
         public string shipToName { get; set; }
         public string shipToAddress { get; set; }
