@@ -11,6 +11,11 @@ namespace GCL_TVS_API.Process
 {
     public class EPODProcess
     {
+        private static SystemDAL _SysDAL = null;
+        private static SystemDAL SysDAL
+        {
+            get { return (_SysDAL == null) ? _SysDAL = new SystemDAL() : _SysDAL; }
+        }
         private static AuthenDAL _AuthenDal = null;
         private static AuthenDAL AuthenDal
         {
@@ -33,15 +38,15 @@ namespace GCL_TVS_API.Process
         }
 
 
-        public ResponseInfo<ResponsePictureSize> GetPictureSize()
+        public ResponseInfo<RspConfigValue> GetSystemConfig(ReqConfigValue data)
         {
-            ResponseInfo<ResponsePictureSize> response = new ResponseInfo<ResponsePictureSize>();
+            ResponseInfo<RspConfigValue> response = new ResponseInfo<RspConfigValue>();
             try
             {
-                response.ResponseData = new ResponsePictureSize();
-                response.ResponseData.Size = EPODDAL.GetPicturesize();
+                response.ResponseData = new RspConfigValue();
+                response.ResponseData.SystemConfValue = SysDAL.GetConfig(data.ConfCode);
 
-                if (string.IsNullOrEmpty(response.ResponseData.Size))
+                if (string.IsNullOrEmpty(response.ResponseData.SystemConfValue))
                 {
                     response.ResponseCode = "01";
                     response.ResponseMsg = "Don't have Configuration or Configuration isn't active";

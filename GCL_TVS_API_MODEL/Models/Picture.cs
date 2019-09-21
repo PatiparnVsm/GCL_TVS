@@ -7,13 +7,13 @@ namespace GCL_TVS_API.Models
 {
     public class Picture
     {
-        public class RequestPictureSize
+        public class ReqConfigValue
         {
-
+            public string ConfCode { get; set; }
         }
-        public class ResponsePictureSize
+        public class RspConfigValue
         {
-            public string Size { get; set; }
+            public string SystemConfValue { get; set; }
         }
         public class RequestPictureList
         {

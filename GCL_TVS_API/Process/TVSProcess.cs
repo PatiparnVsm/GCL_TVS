@@ -116,7 +116,7 @@ namespace GCL_TVS_API.Process
                 //00 = Success,01 = Not found SalesOrders or CustomerCode
                 if (res.Code == "00")
                 {
-                    response = new ReqSurveyUrl();
+                    response = new RspSurveyUrl();
                     var reqParams = GenerateReqparams(data);
                     string hashParams = Utility.HashData(Guid.NewGuid().ToString());
 

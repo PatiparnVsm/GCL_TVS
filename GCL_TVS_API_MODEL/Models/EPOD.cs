@@ -74,7 +74,9 @@ namespace GCL_TVS_API.Models
         {
             public string UserID { get; set; }
             public string TVSurveyID { get; set; }
-            public int SurveyResult { get; set; }
+            public string SurveyAnswerChoice { get; set; }
+            public string SurveyAnswerInput { get; set; }
+
         }
     }
 }

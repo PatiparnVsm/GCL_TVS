@@ -10,8 +10,10 @@ namespace GCL_TVS_API_MODEL.Models
     {
         public Guid TVSurveyID { get; set; }
         public Int32 SurveyID { get; set; }
+        public String AnswerType { get; set; }
         public Int16 SurveySequence { get; set; }
         public String SurveyName { get; set; }
-        public Int32 SurveyResult { get; set; }
+        public String SurveyAnswerChoice { get; set; }
+        public String SurveyAnswerInput { get; set; }
     }
 }

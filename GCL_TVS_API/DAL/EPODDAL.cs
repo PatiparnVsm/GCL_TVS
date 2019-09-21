@@ -240,12 +240,18 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     string sql = @"UPDATE TruckVisualSurveys 
-                                   SET  SurveyResult = @SurveyResult,
-                                        ModifiedBy = @UserID,
-                                        ModifiedOn = getdate()
+                                   SET  SurveyAnswerChoice = @SurveyAnswerChoice,
+                                   SurveyAnswerInput = @SurveyAnswerInput,
+                                   ModifiedBy = @UserID,
+                                   ModifiedOn = getdate()
                                    WHERE TVSurveyID = @TVSurveyID
                                         ";
-                    var resultUpdate = connection.Execute(sql, new { SurveyResult = data.SurveyResult, UserID = data.UserID, TVSurveyID = data.TVSurveyID }, commandType: CommandType.Text);
+                    var param = new DynamicParameters();
+                    param.Add("@TVSurveyID", data.TVSurveyID);
+                    param.Add("@UserID", data.UserID);
+                    param.Add("@SurveyAnswerInput", data.SurveyAnswerInput);
+                    param.Add("@SurveyAnswerChoice", data.SurveyAnswerChoice);
+                    var resultUpdate = connection.Execute(sql, param, commandType: CommandType.Text);
                     if (resultUpdate > 0)
                     {
                         result = true;

@@ -13,11 +13,11 @@ namespace GCL_TVS_API.Controllers
     {
         [JwtAuthentication]
         [HttpPost]
-        public ResponseInfo<ResponsePictureSize> GetPictureSize()
+        public ResponseInfo<RspConfigValue> GetSystemConfig([FromBody] ReqConfigValue data)
         {
             try
             {
-                return base.PostDataToAPINotAuth<ResponseInfo<ResponsePictureSize>>(base.apiPathAndQuery, null);
+                return base.PostDataToAPINotAuth<ResponseInfo<RspConfigValue>>(base.apiPathAndQuery, null);
             }
             catch (Exception ex)
             {

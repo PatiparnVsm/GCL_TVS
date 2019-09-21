@@ -19,13 +19,13 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseInfo<ResponsePictureSize> GetPictureSize()
+        public ResponseInfo<RspConfigValue> GetSystemConfig([FromBody] ReqConfigValue data)
         {
-            ResponseInfo<ResponsePictureSize> res = new ResponseInfo<ResponsePictureSize>();
+            ResponseInfo<RspConfigValue> res = new ResponseInfo<RspConfigValue>();
 
             try
             {
-                res = process.GetPictureSize();
+                res = process.GetSystemConfig(data);
             }
             catch (Exception ex)
             {
