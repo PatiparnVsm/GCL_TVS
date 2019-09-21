@@ -13,6 +13,7 @@ namespace GCL_TVS_API.Models
         }
         public class ReqDoUrl
         {
+            [Required]
             public String DoNo { get; set; }
         }
         public class RspSurveyUrl
@@ -21,6 +22,7 @@ namespace GCL_TVS_API.Models
         }
         public class ReqSurveyUrl
         {
+            [Required]
             public String DoNo { get; set; }
         }
         public class RspDoUrl
