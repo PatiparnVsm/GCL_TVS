@@ -17,7 +17,7 @@ namespace GCL_TVS_API.Controllers
         {
             try
             {
-                return base.PostDataToAPINotAuth<ResponseInfo<RspConfigValue>>(base.apiPathAndQuery, null);
+                return base.PostDataToAPINotAuth<ResponseInfo<RspConfigValue>>(base.apiPathAndQuery, data);
             }
             catch (Exception ex)
             {
