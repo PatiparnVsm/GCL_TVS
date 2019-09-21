@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using GCL_TVS_API_GATEWAY.Filters;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace GCL_TVS_API_GATEWAY
@@ -9,7 +10,9 @@ namespace GCL_TVS_API_GATEWAY
         {
             // Web API configuration and services
             config.Filters.Add(new AuthorizeAttribute());
-            
+
+            config.Filters.Add(new ValidateViewModelAttribute());
+
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 

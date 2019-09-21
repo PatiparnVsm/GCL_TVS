@@ -1,6 +1,7 @@
 ﻿using GCL_TVS_API_MODEL.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GCL_TVS_API.Models
 {
@@ -79,9 +80,13 @@ namespace GCL_TVS_API.Models
         }
         public class DOSOMappingObj
         {
+            [Required]
             public string TransTypeCode { get; set; }
+            [Required]
             public string DoNo { get; set; }
+            [Required]
             public string SoNO { get; set; }
+            [Required]
             public string TruckNo { get; set; }
             public string ContainerNo { get; set; }
         }

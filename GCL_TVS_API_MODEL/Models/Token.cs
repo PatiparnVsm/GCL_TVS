@@ -9,7 +9,7 @@
         public class ResponseToken
         {
             public string access_token { get; set; }
-            public string token_tpye { get; set; } = "Bearer";
+            public string token_type { get; set; } = "Bearer";
             public long expires_in { get; set; }
         }
 
@@ -22,7 +22,7 @@
         public class ResponseTokenByUser
         {
             public string access_token { get; set; }
-            public string token_tpye { get; set; } = "Bearer";
+            public string token_type { get; set; } = "Bearer";
             public long expires_in { get; set; }
             public string UserID { get; set; }
             public string UserType { get; set; }

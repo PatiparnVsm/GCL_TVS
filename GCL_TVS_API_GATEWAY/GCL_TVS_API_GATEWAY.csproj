@@ -169,6 +169,7 @@
     <Compile Include="Filters\AuthenticationFailureResult.cs" />
     <Compile Include="Filters\HttpAuthenticationChallengeContextExtensions.cs" />
     <Compile Include="Filters\JwtAuthenticationAttribute.cs" />
+    <Compile Include="Filters\ValidateModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
