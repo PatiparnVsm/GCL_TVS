@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using CIMB.DSE.ML.API.GATEWAY;
 using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace GCL_TVS_API_GATEWAY
 {
@@ -14,6 +10,8 @@ namespace GCL_TVS_API_GATEWAY
         {
             // Add this code, if not present.
             AreaRegistration.RegisterAllAreas();
+
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiLogHandler());
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
