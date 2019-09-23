@@ -232,11 +232,12 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
         }
 
-        public bool UpdateTruckVisualSurveys(PostTruckVisualServeysObj data)
+        public bool UpdateTruckVisualSurveys(List<PostTruckVisualServeysObj> data)
         {
             bool result = false;
             using (IDbConnection connection = GetOpenConnection())
             {
+                var trans = connection.BeginTransaction();
                 try
                 {
                     string sql = @"UPDATE TruckVisualSurveys 
@@ -246,19 +247,25 @@ namespace GCL_TVS_API.DAL
                                    ModifiedOn = getdate()
                                    WHERE TVSurveyID = @TVSurveyID
                                         ";
-                    var param = new DynamicParameters();
-                    param.Add("@TVSurveyID", data.TVSurveyID);
-                    param.Add("@UserID", data.UserID);
-                    param.Add("@SurveyAnswerInput", data.SurveyAnswerInput);
-                    param.Add("@SurveyAnswerChoice", data.SurveyAnswerChoice);
-                    var resultUpdate = connection.Execute(sql, param, commandType: CommandType.Text);
-                    if (resultUpdate > 0)
+                    var resultUpdate = connection.Execute(sql, data, trans, commandType: CommandType.Text);
+                    if (resultUpdate == data.Count)
                     {
+                        trans.Commit();
                         result = true;
                     }
+                    else
+                    {
+                        trans.Rollback();
+                        result = false;
+                    }
+                    //if (resultUpdate > 0)
+                    //{
+                    //    result = true;
+                    //}
                 }
                 catch (Exception ex)
                 {
+                    trans.Rollback();
                     throw ex;
                 }
             }

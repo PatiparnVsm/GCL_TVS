@@ -2,6 +2,7 @@
 using GCL_TVS_API.Models;
 using GCL_TVS_API_GATEWAY.Filters;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
@@ -127,7 +128,7 @@ namespace GCL_TVS_API.Controllers
 
         [JwtAuthentication]
         [HttpPost]
-        public ResponseStatus PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
+        public ResponseStatus PostTruckVisualSurveys([FromBody] List<PostTruckVisualServeysObj> data)
         {
             try
             {

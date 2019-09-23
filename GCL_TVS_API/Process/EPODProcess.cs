@@ -174,7 +174,7 @@ namespace GCL_TVS_API.Process
             return response;
         }
 
-        public ResponseStatus PostTruckVisualSurveys(PostTruckVisualServeysObj data)
+        public ResponseStatus PostTruckVisualSurveys(List<PostTruckVisualServeysObj> data)
         {
             ResponseStatus res = new ResponseStatus();
 

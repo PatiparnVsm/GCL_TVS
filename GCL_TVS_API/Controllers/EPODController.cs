@@ -2,6 +2,7 @@
 using GCL_TVS_API.Models;
 using GCL_TVS_API.Process;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using static GCL_TVS_API.Models.EPOD;
 using static GCL_TVS_API.Models.Picture;
@@ -162,7 +163,7 @@ namespace GCL_TVS_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ResponseStatus PostTruckVisualSurveys([FromBody] PostTruckVisualServeysObj data)
+        public ResponseStatus PostTruckVisualSurveys([FromBody] List<PostTruckVisualServeysObj> data)
         {
             ResponseStatus res = new ResponseStatus();
 
