@@ -118,6 +118,19 @@ namespace GCL_TVS_API.Controllers
         }
         [JwtAuthentication]
         [HttpPost]
+        public ResponseInfo<RspGetGradeList> GetGradeList([FromBody] ReqGetGradeList data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<ResponseInfo<RspGetGradeList>>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [JwtAuthentication]
+        [HttpPost]
         public dynamic GetDoStatusPage([FromBody] ReqDoUrl data)
         {
             try

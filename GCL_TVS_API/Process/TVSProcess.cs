@@ -262,6 +262,21 @@ namespace GCL_TVS_API.Process
             }
             return response;
         }
+        public ResponseInfo<RspGetGradeList> GetGradeList(ReqGetGradeList data)
+        {
+            ResponseInfo<RspGetGradeList> response = new ResponseInfo<RspGetGradeList>();
+            try
+            {
+                response.ResponseData = new RspGetGradeList();
+                response.ResponseData.gradeList = SODAL.GetGradeList(data);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
         public ResponseInfo<RspSystemNotiList> GetSystemNotiList(ReqSystemNotiList data)
         {
             ResponseInfo<RspSystemNotiList> response = new ResponseInfo<RspSystemNotiList>();

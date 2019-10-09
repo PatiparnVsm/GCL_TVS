@@ -102,7 +102,23 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public ResponseInfo<RspGetGradeList> GetGradeList([FromBody] ReqGetGradeList data)
+        {
+            ResponseInfo<RspGetGradeList> res = new ResponseInfo<RspGetGradeList>();
 
+            try
+            {
+                res = process.GetGradeList(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return res;
+        }
         [AllowAnonymous]
         [HttpPost]
         public ResponseInfo<ResponseSODetails> GetSODetailsFromHash([FromBody] ReqDataByHash data)

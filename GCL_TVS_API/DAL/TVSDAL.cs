@@ -361,6 +361,39 @@ namespace GCL_TVS_API.DAL
             return ResultSet;
 
         }
+
+        public List<GradeList> GetGradeList(ReqGetGradeList data)
+        {
+            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@hashValue", data.hashValue);
+                    string sql = @" select grade, convert(varchar,qty)+' '+uom as qtyuom 
+                                    from TempFromTMS_Orders 
+                                    where hashValue = @hashValue
+                                    and IsActive = 1";
+                    ResultSet = connection.Query<SODetailsDB>(sql, param, commandType: CommandType.StoredProcedure).ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return ResultSet;
+
+        }
         public bool PostSystemNotiReview(NotiReviewObj data)
         {
             bool result = false;

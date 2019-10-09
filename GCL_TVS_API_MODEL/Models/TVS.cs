@@ -25,6 +25,19 @@ namespace GCL_TVS_API.Models
             [Required]
             public String DoNo { get; set; }
         }
+        public class ReqGetGradeList
+        {
+            public string hashValue { get; set; }
+        }
+        public class RspGetGradeList
+        {
+            public List<GradeList> gradeList { get; set; }
+        }
+        public class GradeList
+        {
+            public String grade { get; set; }
+            public String qtyuom { get; set; }
+        }
         public class RspDoUrl
         {
             public String pageUrl { get; set; }
