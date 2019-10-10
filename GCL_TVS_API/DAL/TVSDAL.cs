@@ -371,7 +371,7 @@ namespace GCL_TVS_API.DAL
                 {
                     var param = new DynamicParameters();
                     param.Add("@hashValue", data.hashValue);
-                    string sql = @" select grade, convert(varchar,qty)+' '+uom as qtyuom 
+                    string sql = @" select materialDescription, convert(varchar,qty)+' '+uom as qtyuom 
                                     from TempFromTMS_Orders 
                                     where hashValue = @hashValue
                                     and IsActive = 1";
