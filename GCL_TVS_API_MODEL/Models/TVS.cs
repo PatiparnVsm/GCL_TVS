@@ -35,7 +35,7 @@ namespace GCL_TVS_API.Models
         }
         public class GradeList
         {
-            public String grade { get; set; }
+            public String materialDescription { get; set; }
             public String qtyuom { get; set; }
         }
         public class RspDoUrl

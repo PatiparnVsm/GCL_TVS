@@ -364,18 +364,18 @@ namespace GCL_TVS_API.DAL
 
         public List<GradeList> GetGradeList(ReqGetGradeList data)
         {
-            List<SODetailsDB> ResultSet = new List<SODetailsDB>();
+            List<GradeList> ResultSet = new List<GradeList>();
             using (IDbConnection connection = GetOpenConnection())
             {
                 try
                 {
                     var param = new DynamicParameters();
                     param.Add("@hashValue", data.hashValue);
-                    string sql = @" select grade, convert(varchar,qty)+' '+uom as qtyuom 
+                    string sql = @" select materialDescription, convert(varchar,qty)+' '+uom as qtyuom 
                                     from TempFromTMS_Orders 
                                     where hashValue = @hashValue
                                     and IsActive = 1";
-                    ResultSet = connection.Query<SODetailsDB>(sql, param, commandType: CommandType.StoredProcedure).ToList();
+                    ResultSet = connection.Query<GradeList>(sql, param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)

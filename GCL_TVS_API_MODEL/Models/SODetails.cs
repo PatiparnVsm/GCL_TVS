@@ -85,6 +85,8 @@ namespace GCL_TVS_API.Models
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }
         public string DoNo { get; set; }
+        public string SoldToName { get; set; }
+        public string MaterialDescription { get; set; }
     }
 
     public class SODetailsDB
@@ -170,5 +172,8 @@ namespace GCL_TVS_API.Models
         public string DriverName { get; set; }
         public bool IsCompleted { get; set; }
         public string DoNo { get; set; }
+        public string SoldToName { get; set; }
+        public string MaterialDescription { get; set; }
+
     }
 }
