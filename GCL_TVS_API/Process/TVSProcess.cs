@@ -370,6 +370,29 @@ namespace GCL_TVS_API.Process
             }
             return res;
         }
+        public ResponseStatus UpdateCompany(UpdCompanyObj data)
+        {
+            dynamic res = new ResponseStatus();
+            try
+            {
+                var result = SODAL.PostUpdateCompany(data);
+                if (result)
+                {
+                    res.status = new Status();
+                }
+                else
+                {
+                    res.status = new Status();
+                    res.status.code = "01";
+                    res.status.message = "can't update data";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
         private string GenerateReqparams(object data)
         {
             string reqParam = string.Empty;

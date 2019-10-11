@@ -263,5 +263,23 @@ namespace GCL_TVS_API.Controllers
 
             return res;
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public ResponseStatus PostUpdateCompany([FromBody] UpdCompanyObj data)
+        {
+            ResponseStatus res = new ResponseStatus();
+
+            try
+            {
+                res = process.UpdateCompany(data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
     }
 }

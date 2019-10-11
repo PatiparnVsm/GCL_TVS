@@ -208,5 +208,20 @@ namespace GCL_TVS_API.Controllers
                 throw ex;
             }
         }
+
+        [JwtAuthentication]
+        [HttpPost]
+        public ResponseStatus PostUpdateCompany([FromBody] UpdCompanyObj data)
+        {
+            try
+            {
+                return base.PostDataToAPINotAuth<ResponseStatus>(base.apiPathAndQuery, data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

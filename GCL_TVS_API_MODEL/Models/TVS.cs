@@ -105,5 +105,12 @@ namespace GCL_TVS_API.Models
             public string TruckNo { get; set; }
             public string ContainerNo { get; set; }
         }
+
+        public class UpdCompanyObj
+        {
+            public string CompanyCode { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
+        }
     }
 }

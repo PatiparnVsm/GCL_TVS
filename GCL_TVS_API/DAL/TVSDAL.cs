@@ -371,11 +371,7 @@ namespace GCL_TVS_API.DAL
                 {
                     var param = new DynamicParameters();
                     param.Add("@hashValue", data.hashValue);
-                    string sql = @" select materialDescription, convert(varchar,qty)+' '+uom as qtyuom 
-                                    from TempFromTMS_Orders 
-                                    where hashValue = @hashValue
-                                    and IsActive = 1";
-                    ResultSet = connection.Query<GradeList>(sql, param, commandType: CommandType.Text).ToList();
+                    ResultSet = connection.Query<GradeList>("SP_GetGradeList", param, commandType: CommandType.StoredProcedure).ToList();
 
                 }
                 catch (Exception ex)
@@ -406,7 +402,7 @@ namespace GCL_TVS_API.DAL
                                    WHERE [SysNotiID] = @SysNotiID
                                         ";
                     var resultUpdate = connection.Execute(sql, new { SysNotiID = data.SysNotiID }, commandType: CommandType.Text);
-                    if(resultUpdate > 0)
+                    if (resultUpdate > 0)
                     {
                         result = true;
                     }
@@ -493,6 +489,28 @@ namespace GCL_TVS_API.DAL
 
                 return result;
             }
+        }
+        public bool PostUpdateCompany(UpdCompanyObj data)
+        {
+            bool result = false;
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    var param = new DynamicParameters();
+                    param.Add("@CompanyCode", data.CompanyCode);
+                    param.Add("@Phone", data.Phone);
+                    param.Add("@Email", data.Email);
+
+                    result = connection.Query<bool>("SP_UpdateCompaniesByCompanyCode", param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return result;
         }
     }
 }
