@@ -26,62 +26,62 @@ namespace GCL_TVS_API.Controllers
             }
         }
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<ResponsePictureList<string>>>(base.apiPathAndQuery, data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<ResponsePictureList<string>> GetPicturesList([FromBody] RequestPictureList data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<ResponsePictureList<string>>>(base.apiPathAndQuery, data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<string> PostTruckVisualActivities([FromBody] ReqPostTruckVisualActivities data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<string> PostTruckVisualPictures([FromBody] ReqPostTruckVisualPictures data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<string>>(base.apiPathAndQuery, data);
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<ResponseSODetails>>(base.apiPathAndQuery, data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<ResponseSODetails> GetJobListFromDriver([FromBody] RequestJobListFromDriver data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<ResponseSODetails>>(base.apiPathAndQuery, data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         [JwtAuthentication]
         [HttpPost]
@@ -98,33 +98,33 @@ namespace GCL_TVS_API.Controllers
 
         }
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<ResSurverList>>(base.apiPathAndQuery, data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<ResSurverList> GetSurveysList([FromBody] SurverList data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<ResSurverList>>(base.apiPathAndQuery, data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
-        [JwtAuthentication]
-        [HttpPost]
-        public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
-        {
-            try
-            {
-                return base.PostDataToAPINotAuth<ResponseInfo<ResActivitieList>>(base.apiPathAndQuery, data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[JwtAuthentication]
+        //[HttpPost]
+        //public ResponseInfo<ResActivitieList> GetActivityList([FromBody] ActivitieList data)
+        //{
+        //    try
+        //    {
+        //        return base.PostDataToAPINotAuth<ResponseInfo<ResActivitieList>>(base.apiPathAndQuery, data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         [JwtAuthentication]
         [HttpPost]
