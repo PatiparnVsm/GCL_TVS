@@ -15,6 +15,13 @@ namespace GCL_TVS_API.Models
         {
             [Required]
             public String DoNo { get; set; }
+            [Required]
+            public String Signature_Status { get; set; }
+        }
+        public class ReqDo
+        {
+            [Required]
+            public String DoNo { get; set; }
         }
         public class RspSurveyUrl
         {

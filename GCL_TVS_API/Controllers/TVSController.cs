@@ -5,6 +5,7 @@ using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
+using static GCL_TVS_API.Models.Token;
 using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.Controllers
@@ -42,7 +43,20 @@ namespace GCL_TVS_API.Controllers
 
             try
             {
-                res = process.GenerateDoUrl(data);
+                if (data.Signature_Status == "Y")
+                {
+                    ReqDo reqDo = new ReqDo();
+                    reqDo.DoNo = data.DoNo;
+                    res = process.GenerateDoUrl(reqDo);
+                }
+                else
+                {
+                    res = new ErrorAuthen();
+                    res.status = new StatusError();
+                    res.status.code = res.Code;
+                    res.status.message = "Signature status is not correct";
+                }
+                
             }
             catch (Exception ex)
             {

@@ -155,6 +155,27 @@ namespace GCL_TVS_API.DAL
                 }
             }
         }
+        public void UpdateSignature(string JobOrderId)
+        {
+            using (IDbConnection connection = GetOpenConnection())
+            {
+                try
+                {
+                    string sql = @"Update TruckVisualSignature
+                                    set ModifiedBy = 'EDOSystem' , ModifiedOn = getdate()
+                                    where JobOrderID = @JobOrderID
+                                        ";
+                    var param = new DynamicParameters();
+                    param.Add("@JobOrderID", JobOrderId);
+                    connection.ExecuteScalar(sql, param, commandType: CommandType.Text);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         public void PostSystemNoti(ReqPostSystemNoti data)
         {
             using (IDbConnection connection = GetOpenConnection())
@@ -294,7 +315,7 @@ namespace GCL_TVS_API.DAL
             }
             return res;
         }
-        public ResSP ValidateDODetails(ReqDoUrl data)
+        public ResSP ValidateDODetails(ReqDo data)
         {
             ResSP res = new ResSP();
             using (IDbConnection connection = GetOpenConnection())

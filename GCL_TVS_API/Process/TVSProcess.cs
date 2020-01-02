@@ -72,7 +72,7 @@ namespace GCL_TVS_API.Process
 
             return response;
         }
-        public dynamic GenerateDoUrl(ReqDoUrl data)
+        public dynamic GenerateDoUrl(ReqDo data)
         {
             dynamic response = null;
 
@@ -87,6 +87,7 @@ namespace GCL_TVS_API.Process
                     string hashParams = Utility.HashData(Guid.NewGuid().ToString());
 
                     SODAL.InsLogReq(reqParams, hashParams);
+                    SODAL.UpdateSignature(res.Msg);
 
                     hashParams = HttpUtility.UrlEncode(hashParams);
                     response.pageUrl = SysDAL.GetConfig("1002") + hashParams;
