@@ -315,7 +315,7 @@ namespace GCL_TVS_API.DAL
             }
             return res;
         }
-        public ResSP ValidateDODetails(ReqDo data)
+        public ResSP ValidateDODetails(ReqDoUrl data)
         {
             ResSP res = new ResSP();
             using (IDbConnection connection = GetOpenConnection())

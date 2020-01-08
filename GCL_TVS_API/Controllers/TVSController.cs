@@ -1,11 +1,9 @@
-﻿using GCL_TVS_API.Filters;
-using GCL_TVS_API.Models;
+﻿using GCL_TVS_API.Models;
 using GCL_TVS_API.Process;
 using System;
 using System.Web.Http;
 using static GCL_TVS_API.Models.SODetailsService;
 using static GCL_TVS_API.Models.SODetailsUrl;
-using static GCL_TVS_API.Models.Token;
 using static GCL_TVS_API.Models.TVS;
 
 namespace GCL_TVS_API.Controllers
@@ -28,7 +26,7 @@ namespace GCL_TVS_API.Controllers
             {
                 res = process.GenerateSoUrl(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -43,24 +41,11 @@ namespace GCL_TVS_API.Controllers
 
             try
             {
-                if (data.Signature_Status == "Y")
-                {
-                    ReqDo reqDo = new ReqDo();
-                    reqDo.DoNo = data.DoNo;
-                    res = process.GenerateDoUrl(reqDo);
-                }
-                else
-                {
-                    res = new ErrorAuthen();
-                    res.status = new StatusError();
-                    res.status.code = res.Code;
-                    res.status.message = "Signature status is not correct";
-                }
-                
+                res = process.GenerateDoUrl(data);
             }
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
             }
 
             return res;
@@ -77,7 +62,7 @@ namespace GCL_TVS_API.Controllers
             }
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
             }
 
             return res;
