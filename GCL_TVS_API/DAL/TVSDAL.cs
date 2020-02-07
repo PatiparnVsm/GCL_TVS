@@ -272,7 +272,7 @@ namespace GCL_TVS_API.DAL
                 try
                 {
                     var param = new DynamicParameters();
-                    for (var i = 0; i < data.Length; i++)
+                    for (var i = 0; i < data.Length-1; i++)
                     {
                         var arrData = data[i].Split('=');
                         param.Add("@" + arrData[0], arrData[1]);
