@@ -53,7 +53,6 @@ namespace GCL_TVS_API.Controllers
                 {
                     res = new ErrorAuthen();
                     res.status = new StatusError();
-                    res.status.code = res.Code;
                     res.status.message = "Signature status is not correct";
                 }
                 
