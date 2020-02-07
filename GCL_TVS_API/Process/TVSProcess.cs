@@ -72,7 +72,7 @@ namespace GCL_TVS_API.Process
 
             return response;
         }
-        public dynamic GenerateDoUrl(ReqDo data)
+        public dynamic GenerateDoUrl(ReqDoUrl data)
         {
             dynamic response = null;
 
@@ -87,8 +87,7 @@ namespace GCL_TVS_API.Process
                     string hashParams = Utility.HashData(Guid.NewGuid().ToString());
 
                     SODAL.InsLogReq(reqParams, hashParams);
-                    SODAL.UpdateSignature(res.Msg);
-
+                   
                     hashParams = HttpUtility.UrlEncode(hashParams);
                     response.pageUrl = SysDAL.GetConfig("1002") + hashParams;
                 }
@@ -122,6 +121,12 @@ namespace GCL_TVS_API.Process
                     string hashParams = Utility.HashData(Guid.NewGuid().ToString());
 
                     SODAL.InsLogReq(reqParams, hashParams);
+
+                    if (data.Signature_Status == "Y")
+                    {
+                        SODAL.UpdateSignature(res.Msg);
+                    }
+
 
                     hashParams = HttpUtility.UrlEncode(hashParams);
                     response.pageUrl = SysDAL.GetConfig("1003") + hashParams;
@@ -181,7 +186,7 @@ namespace GCL_TVS_API.Process
                 {
                     string[] reqParams = reqParam.Split(',');
                     response = new RspSurveyList();
-                    
+
 
                     response.surveys = SODAL.GetSurveyByHash(reqParams);
 
@@ -355,7 +360,7 @@ namespace GCL_TVS_API.Process
             {
                 var result = SODAL.PostDOSOMapping(data);
                 if (result)
-                {                    
+                {
                     res.status = new Status();
                 }
                 else
